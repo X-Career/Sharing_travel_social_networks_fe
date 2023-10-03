@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
-import {View, Text, Image, TextInput} from 'react-native';
+import {View, Text, Image, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback,Keyboard} from 'react-native';
 import styles from './profile.style';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {BackBtn, EditBtn,Button} from '../components';
+import {BackBtn, EditBtn,Button, BirthdayForm} from '../components';
 import CheckBox from '@react-native-community/checkbox';
 import SelectDropDown from 'react-native-select-dropdown';
-import { BirthdayForm } from '../constants';
-// import Button from '../components';
+
 
 const Profile = () => {
   const [isSelected, setSelection] = useState(false);
+
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -63,9 +64,9 @@ const Profile = () => {
             <BirthdayForm />
           </View>
 
-          {/* <View style={styles.wrapper}>
+          <View style={styles.wrapper}>
             <Text>Description</Text>
-          </View> */}
+          </View>
 
           <View style={styles.wrapper}>
             <TextInput
