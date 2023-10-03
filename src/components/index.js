@@ -1,9 +1,11 @@
 import BackBtn from "./BackBtn";
 import EditBtn from "./EditBtn";
-import Button from './Button'
+import Button from './Button';
+import BirthdayForm from "./BirthdayForm";
 
 export {
     BackBtn,
     EditBtn,
-    Button
+    Button,
+    BirthdayForm
 }
