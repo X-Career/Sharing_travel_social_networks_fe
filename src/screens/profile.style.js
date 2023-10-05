@@ -49,21 +49,23 @@ const styles = StyleSheet.create({
   },
   Img: {
     flex: 1,
+    position: 'absolute',
+    top: -110,
+    left: 130,
   },
   profileImg: {
     height: 150,
     width: 150,
     borderRadius: 150,
     resizeMode: 'contain',
-    borderWidth: 2,
+    borderWidth: 3,
     borderColor: COLORS.offwhite,
-    position: 'absolute',
-    top: -110,
-    left: 130,
+  
   },
   infoUser: {
     flex: 10,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: SIZES.xxLarge,
   },
   fullName: {
     fontSize: SIZES.xLarge,
