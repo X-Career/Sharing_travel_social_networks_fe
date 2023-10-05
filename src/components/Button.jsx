@@ -8,7 +8,7 @@ const Button = ({onPress,title, loader, isValid, width}) => {
           // onPress={onPress}
           onPress={onPress}
       // style={styles.btnStyle(60)}
-      style={styles.btnStyle(60)}
+      style={styles.btnStyle(50)}
 
       
       >
