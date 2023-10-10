@@ -13,6 +13,7 @@ const Profile = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+    <>
       <View style={styles.topLayout}>
         <View style={styles.topTitle}>
           <BackBtn />
@@ -81,7 +82,9 @@ const Profile = () => {
 
         </View>
       </View>
-    </SafeAreaView>
+      </>
+     </SafeAreaView>
+
   );
 };
 
