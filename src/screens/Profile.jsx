@@ -41,6 +41,7 @@ const Profile = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+    <>
       <View style={styles.topLayout}>
         <View style={styles.topTitle}>
           <BackBtn />
@@ -233,6 +234,7 @@ const Profile = () => {
         </View>
 
 
+
         <KeyboardAvoidingView style={styles.infoUser}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         >
@@ -286,6 +288,7 @@ const Profile = () => {
         </KeyboardAvoidingView>
       </View> */}
     </SafeAreaView>
+
   );
 };
 
