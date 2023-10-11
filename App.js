@@ -1,13 +1,27 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, {useContext} from 'react'
+import LoginProvider, {LoginContext} from './src/Login/logincontext';
+
+import Sigin from './src/Login'
 import Profile from './src/screens/Profile'
 
-const App = () => {
+const AppMobile = () => {
+  const [state, dispatch] = useContext(LoginContext)
   return (
     <View style={{ flex: 1 }}>
-
-      <Profile/>
-    </View>
+        {/* {state.first? 
+          <Profile/>
+          : */}
+          <Sigin/>
+        {/* } */}
+      </View>
+  )
+}
+const App = () => {  
+  return (
+    <LoginProvider>
+      <AppMobile/>
+    </LoginProvider>
   )
 }
 
