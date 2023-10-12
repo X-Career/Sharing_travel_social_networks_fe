@@ -41,7 +41,7 @@ const Profile = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-    <>
+    
       <View style={styles.topLayout}>
         <View style={styles.topTitle}>
           <BackBtn />
