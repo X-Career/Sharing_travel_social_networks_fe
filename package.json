@@ -8,16 +8,20 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "link": "react-native link"
+    "link": "react-native link",
+    "dev": "source ~/.bash_profile&&react-native run-android"
   },
   "dependencies": {
     "@react-native-community/checkbox": "^0.5.16",
     "@react-native-community/datetimepicker": "^7.6.0",
+
     "@react-navigation/bottom-tabs": "^6.5.9",
     "@react-navigation/native": "^6.1.8",
     "@react-navigation/native-stack": "^6.9.14",
+
     "@reduxjs/toolkit": "^1.9.7",
     "@rneui/base": "^4.0.0-rc.8",
+
     "@rneui/themed": "^4.0.0-rc.8",
     "axios": "^1.5.1",
     "react": "18.2.0",

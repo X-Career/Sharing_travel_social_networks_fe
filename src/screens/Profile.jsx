@@ -50,6 +50,7 @@ const Profile = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
+    
       <View style={styles.topLayout}>
         <View style={styles.topTitle}>
           <BackBtn onPress={()=> navigation.goBack()} />
@@ -138,6 +139,7 @@ const Profile = ({navigation}) => {
             </TouchableWithoutFeedback>
           </KeyboardAvoidingView>
         </View>
+
       ) : (
         <View style={styles.botLayout}>
           <View style={styles.Img}>
@@ -154,6 +156,7 @@ const Profile = ({navigation}) => {
               <Text style={styles.genderText}>Gender:</Text>
               <View style={styles.genderItems}>
                 <Text style={[styles.borderText, styles.desText]}>Male</Text>
+
               </View>
             </View>
 
@@ -183,6 +186,7 @@ const Profile = ({navigation}) => {
         </View>
       )}
     </SafeAreaView>
+
   );
 };
 
