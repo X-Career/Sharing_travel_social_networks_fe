@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     flex: 1,
     position: 'absolute',
     top: -110,
-    left: 130,
+    left: 110,
   },
   profileImg: {
     height: 150,
@@ -102,9 +102,34 @@ const styles = StyleSheet.create({
   },
   genderText: {
     fontFamily: 'Poppins-Bold',
-    color: COLORS.black
+    color: COLORS.black,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-
+  wrapperShow: {
+    marginTop: 15,
+    width: SIZES.width - 50,
+    borderRadius: 10,
+    borderColor: COLORS.gray,
+    // justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.offwhite,
+    // marginHorizontal: 30,
+    height: 60
+    
+  },
+  birthText: {
+    fontSize: SIZES.xxLarge - 4
+  },
+  btnPassword: { marginTop: 10 },
+  wrapperDescription: {
+    height: 150,
+    padding: 6
+  },
+  desText: {
+    fontFamily: 'Poppins-Regular',
+    color: COLORS.black
+  }
 });
 
 export default styles;
