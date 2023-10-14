@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     // height: 50,
     borderRadius: 10,
     paddingStart: 20,
+    color: COLORS.black,
   },
   checkBox: {
     flexDirection: 'row',
@@ -104,7 +105,13 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Bold',
     color: COLORS.black,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+  },
+  checkbox: {
+    borderWidth: 2,
+    borderColor: COLORS.gray2,
+    width: 20,
+    height: 20
   },
   wrapperShow: {
     marginTop: 15,
@@ -119,7 +126,8 @@ const styles = StyleSheet.create({
     
   },
   birthText: {
-    fontSize: SIZES.xxLarge - 4
+    fontSize: SIZES.xxLarge - 4,
+    color: COLORS.black
   },
   btnPassword: { marginTop: 10 },
   wrapperDescription: {
@@ -129,7 +137,8 @@ const styles = StyleSheet.create({
   desText: {
     fontFamily: 'Poppins-Regular',
     color: COLORS.black
-  }
+  },
+
 });
 
 export default styles;

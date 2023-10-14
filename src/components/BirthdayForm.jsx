@@ -25,11 +25,7 @@ const BirthdayForm = () => {
   return (
     <View style={styles.container}>
       <View style={styles.viewBtn}>
-        {/* <Button onPress={showMode} title="Pick Date of Birthday"
-          style={styles.btn} /> */}
-        <Button onPress={showMode} title={'Pick your birthday'}
-          // style={stylesBtn.btnStyle(160)}
-        />
+        <Button onPress={showMode} title={'Pick your birthday'}        />
       </View>
       {show && (
         <DateTimePicker

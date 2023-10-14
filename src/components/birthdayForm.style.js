@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         fontSize: SIZES.xLarge - 2,
         fontFamily: 'Poppins-SemiBold',
         marginTop: 2,
-        color: COLORS.gray
+        color: COLORS.black
 
     }
 })
