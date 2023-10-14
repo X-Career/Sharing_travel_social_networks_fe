@@ -12,11 +12,9 @@ import {
 } from 'react-native';
 import styles from './profile.style';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {BackBtn, EditBtn,Button} from '../components';
+import {BackBtn, EditBtn, Button, BirthdayForm} from '../components';
 import CheckBox from '@react-native-community/checkbox';
-import SelectDropDown from 'react-native-select-dropdown';
-import { BirthdayForm } from '../constants';
-// import Button from '../components';
+import {SelectDropDown} from 'react-native-select-dropdown';
 
 const Profile = ({navigation}) => {
   const [isSelected, setSelection] = useState(false);
@@ -28,7 +26,7 @@ const Profile = ({navigation}) => {
         <View style={styles.topTitle}>
           <BackBtn onPress={()=> navigation.goBack()} />
           <Text style={styles.title}>Profile</Text>
-          <EditBtn onPress={handleEdit} />
+          {/* <EditBtn onPress={handleEdit} /> */}
         </View>
         <View style={styles.subTopLayout}>
           <View style={styles.radiusLeft}></View>
