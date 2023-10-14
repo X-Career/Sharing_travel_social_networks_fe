@@ -12,15 +12,10 @@ import {
 } from 'react-native';
 import styles from './profile.style';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {
-  BackBtn,
-  EditBtn,
-  Buttona,
-  BirthdayForm,
-  ChangeBtn,
-} from '../components';
+import {BackBtn, EditBtn, Button, BirthdayForm} from '../components';
 import CheckBox from '@react-native-community/checkbox';
-import SelectDropDown from 'react-native-select-dropdown';
+
+
 
 import {Button} from '@rneui/themed';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -34,8 +29,12 @@ import {
 } from '../redux/features/profile/profileSlice';
 import {COLORS} from '../constants';
 
+import {SelectDropDown} from 'react-native-select-dropdown';
+
+
 const Profile = ({navigation}) => {
   const [isSelected, setSelection] = useState(false);
+
 
   const dispatch = useDispatch();
   const name = useSelector(state => state.profile.name);
@@ -50,17 +49,19 @@ const Profile = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
+
       <View style={styles.topLayout}>
         <View style={styles.topTitle}>
           <BackBtn onPress={() => navigation.goBack()} />
           <Text style={styles.title}>Profile</Text>
-          <EditBtn onPress={handleEdit} />
+          {/* <EditBtn onPress={handleEdit} /> */}
         </View>
         <View style={styles.subTopLayout}>
           <View style={styles.radiusLeft}></View>
           <View style={styles.radiusRight}></View>
         </View>
       </View>
+
       {showEdit ? (
         <View style={styles.botLayout}>
           <View style={styles.Img}>
@@ -164,11 +165,10 @@ const Profile = ({navigation}) => {
               <View style={styles.genderItems}>
                 <Text style={[styles.borderText, styles.desText]}>Male</Text>
               </View>
+
             </View>
 
-            <View style={styles.wrapperShow}>
-              <Text style={styles.birthText}>--/--/----</Text>
-            </View>
+            <View style={styles.genderItems}>
 
             <View style={[styles.wrapperShow, styles.wrapperDescription]}>
               <ScrollView>
@@ -186,7 +186,12 @@ const Profile = ({navigation}) => {
             <View style={styles.wrapper}>
               <Button radius={'md'} type="solid" title={'Change Password'} />
             </View>
+
           </View>
+          <Button
+            title={'Save'}
+          />
+
         </View>
       )}
     </SafeAreaView>
