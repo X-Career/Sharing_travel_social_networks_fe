@@ -12,10 +12,8 @@ import {
 } from 'react-native';
 import styles from './profile.style';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {BackBtn, EditBtn, Button, BirthdayForm} from '../components';
+import {BackBtn, EditBtn, BirthdayForm, ChangeBtn} from '../components';
 import CheckBox from '@react-native-community/checkbox';
-
-
 
 import {Button} from '@rneui/themed';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -31,10 +29,8 @@ import {COLORS} from '../constants';
 
 import {SelectDropDown} from 'react-native-select-dropdown';
 
-
 const Profile = ({navigation}) => {
   const [isSelected, setSelection] = useState(false);
-
 
   const dispatch = useDispatch();
   const name = useSelector(state => state.profile.name);
@@ -49,24 +45,23 @@ const Profile = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-
       <View style={styles.topLayout}>
         <View style={styles.topTitle}>
           <BackBtn onPress={() => navigation.goBack()} />
           <Text style={styles.title}>Profile</Text>
           {/* <EditBtn onPress={handleEdit} /> */}
         </View>
+        <EditBtn onPress={handleEdit} />
         <View style={styles.subTopLayout}>
           <View style={styles.radiusLeft}></View>
           <View style={styles.radiusRight}></View>
         </View>
       </View>
-
       {showEdit ? (
         <View style={styles.botLayout}>
           <View style={styles.Img}>
             <Image
-// source={{uri: 'https://randomuser.me/api/portraits/men/36.jpg'}}
+              // source={{uri: 'https://randomuser.me/api/portraits/men/36.jpg'}}
               source={require('../assets/images/profile.jpeg')}
               style={styles.profileImg}
             />
@@ -165,33 +160,27 @@ const Profile = ({navigation}) => {
               <View style={styles.genderItems}>
                 <Text style={[styles.borderText, styles.desText]}>Male</Text>
               </View>
-
             </View>
 
-            <View style={styles.genderItems}>
+            {/* <View style={styles.genderItems}> */}
+              <View style={[styles.wrapperShow, styles.wrapperDescription]}>
+                <ScrollView>
+                  <Text style={styles.desText}>
+                    Description Lorem ipsum dolor sit, amet consectetur
+                    adipisicing elit. Voluptas expedita quo ex asperiores
+                    excepturi recusandae quod perferendis laboriosam saepe
+                    voluptates.asperiores excepturi recusandae quod perferendis
+                    laboriosam saepe voluptates.asperiores excepturi recusandae
+                    quod perferendis laboriosam saepe voluptates.
+                  </Text>
+                </ScrollView>
+              </View>
 
-            <View style={[styles.wrapperShow, styles.wrapperDescription]}>
-              <ScrollView>
-                <Text style={styles.desText}>
-                  Description Lorem ipsum dolor sit, amet consectetur
-                  adipisicing elit. Voluptas expedita quo ex asperiores
-                  excepturi recusandae quod perferendis laboriosam saepe
-                  voluptates.asperiores excepturi recusandae quod perferendis
-                  laboriosam saepe voluptates.asperiores excepturi recusandae
-                  quod perferendis laboriosam saepe voluptates.
-                </Text>
-              </ScrollView>
-            </View>
-
-            <View style={styles.wrapper}>
-              <Button radius={'md'} type="solid" title={'Change Password'} />
-            </View>
-
+              <View style={styles.wrapper}>
+                <Button radius={'md'} type="solid" title={'Change Password'} />
+              </View>
+            {/* </View> */}
           </View>
-          <Button
-            title={'Save'}
-          />
-
         </View>
       )}
     </SafeAreaView>

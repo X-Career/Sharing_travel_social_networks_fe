@@ -8,6 +8,7 @@ import Account from "./newfeed/Account";
 import CardImage from "./newfeed/CardImage";
 import Comments from "./newfeed/Comments";
 import Interact from "./newfeed/Interact";
+import Post from "./Post";
 
 export {
     BackBtn,
@@ -20,4 +21,5 @@ export {
     CardImage,
     Comments,
     Interact,
+    Post,
 }

@@ -10,7 +10,8 @@
     "test": "jest",
     "link": "react-native link",
     "dev": "source ~/.bash_profile&&react-native run-android",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "doctor" : "react-native doctor"
   },
   "dependencies": {
     "@react-native-community/checkbox": "^0.5.16",

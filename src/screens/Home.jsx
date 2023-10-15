@@ -1,14 +1,15 @@
 
 import {View, Text, SafeAreaView, ScrollView, FlatList } from 'react-native';
 import React from 'react';
-import { NewFeed } from '../components';
-import Post from '../components/Post';
+import { NewFeed, Post} from '../components';
+
 
 const Home = () => {
   return (
     <SafeAreaView style={{backgroundColor: 'white'}}>
       <ScrollView>
-    <Post />
+        
+    {/* <Post /> */}
         <View >
           <Text style={{ color: 'black', fontSize: 30, fontFamily: 'Poppins-SemiBold', marginStart: 14 }}>SomeWhere</Text>
           
@@ -18,6 +19,9 @@ const Home = () => {
             renderItem={({ item }) => <NewFeed item={item} />}
           /> */}
 
+          <NewFeed />
+          <NewFeed />
+          <NewFeed />
           <NewFeed />
 
         </View>
