@@ -5,6 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import BottomTabNavigation from './src/navigation/BottomTabNavigation';
 import { StatusBar } from 'react-native';
 import { COLORS } from './src/constants';
+import {Login} from './src/screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,12 @@ const App = () => {
           component={BottomTabNavigation}
           options={{headerShown: false}}
         />
+
+        {/* <Stack.Screen
+          name='Login'
+          component={Login}
+          options={{headerShown: false}}
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

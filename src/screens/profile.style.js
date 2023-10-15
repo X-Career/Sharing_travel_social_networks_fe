@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     flex: 1,
     position: 'absolute',
     top: -110,
-    left: 110,
+    left: 130,
   },
   profileImg: {
     height: 150,
