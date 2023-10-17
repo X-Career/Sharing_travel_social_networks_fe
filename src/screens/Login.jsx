@@ -37,8 +37,8 @@ const Login = () => {
     return ( 
         <View style={styles.loginBottom}>
             <View style={{...styles.from}}>
-                    <MyInput icon="user" text="username" name={username} setName={setUserName}/>
-                    <MyInput icon="lock1" text="password" name={password} setName={setPassword} eyes/>                    
+                    <MyInput icon="user" text="username" name={username} setName={setUserName} suffixIcon={false}/>
+                    <MyInput icon="lock1" text="password" name={password} setName={setPassword} suffixIcon={true}/>                    
                     <View style={styles.forgot}>
                         <TouchableOpacity onPress={handlerpasswod} >
                             <Text style={{...styles.text,color: root.mainColor,}}>
