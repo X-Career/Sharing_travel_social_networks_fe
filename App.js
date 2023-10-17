@@ -6,10 +6,14 @@ import BottomTabNavigation from './src/navigation/BottomTabNavigation';
 import { StatusBar } from 'react-native';
 import { COLORS } from './src/constants';
 import Login from './src/screens/Login';
+import { useSelector } from 'react-redux';
+
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  const isLoggedIn = useSelector(state => state)
+  console.log('isLoggedIn', isLoggedIn);
   React.useEffect(() => {
     StatusBar.setBackgroundColor(COLORS.primary, true);
 

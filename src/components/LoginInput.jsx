@@ -5,9 +5,9 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import {root} from './LoginStyle';
 import MyIcon from './LoginIcon';
 
-const Myinput = (porps) => {
+const Myinput = (props) => {
     
-    const [eye, setEye] = useState(porps.eyes);
+    const [eye, setEye] = useState(props.eyes);
     const type = eye ? true : false
 
     const hanldeEye = () => {
@@ -17,16 +17,16 @@ const Myinput = (porps) => {
         <View style={{...styles.input}}>
                     <View style={{...styles.icon, backgroundColor:"#fff"}}>
                     <Icon
-                         name={porps.icon} size={20}/>
+                         name={props.icon} size={20}/>
                     </View>
                     <TextInput
                         style={styles.textinput}
                         secureTextEntry={type}
-                        onChangeText={porps.setName}
-                        value={porps.name}
-                        placeholder={porps.text}
+                        onChangeText={props.setName}
+                        value={props.name}
+                        placeholder={props.text}
                     />
-                    { !porps.eyes || <>
+                    { !props.eyes || <>
                         {eye ?
                         <MyIcon name="eye-slash" hanlder={hanldeEye}/>:
                         <MyIcon name="eye" hanlder={hanldeEye}/> 
