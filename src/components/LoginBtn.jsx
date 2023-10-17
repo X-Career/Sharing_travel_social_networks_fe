@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 
-import {root} from '../styles'
+import {root} from './LoginStyle'
 
 function MyButton(porps) {
 const handler = () => {
