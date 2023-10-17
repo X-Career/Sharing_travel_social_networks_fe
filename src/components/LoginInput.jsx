@@ -2,8 +2,8 @@ import React, { Component, useState } from 'react';
 import {View, Text, TextInput, Alert, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-import {root} from '../styles';
-import MyIcon from './icon';
+import {root} from './LoginStyle';
+import MyIcon from './LoginIcon';
 
 const Myinput = (porps) => {
     
