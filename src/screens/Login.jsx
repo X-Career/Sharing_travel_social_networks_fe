@@ -1,35 +1,33 @@
-import React, {  useState, useContext } from 'react';
+import React, { useState } from 'react';
 import {View, Text, TouchableOpacity, Alert,} from 'react-native';
-
-
-import styles, {root} from './styles';
-import Mybtn from './components/button';
-import MyInput from './components/input';
-import {LoginContext } from './logincontext';
-import {setSigin} from './actionLogin'
+import {useDispatch, useSelector} from 'react-redux';
+import { login } from '../redux/features/auth/userSlice';
+import styles, {root} from '../components/LoginStyle';
+import MyButton from '../components/LoginBtn';
+import MyInput from '../components/LoginInput';
 
 
 
 
-function Login() {
-    const [state, dispatch] = useContext()
-    const [name, setName] = useState("");
+const Login = () => {
+    const dispatch = useDispatch();
+    const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     
-    const handlerLogin= () => {
-        const users = state.users
-        let user = users.find(user => user.username === name);
-        // Alert.alert(`dang nhap thanh cong ${user.username} va password ${user.password}`)
-        if (user === undefined) {
-            Alert.alert(` Sai tên đăng nhập`)
-        } else if (user.password !== password) {
-            Alert.alert(` Sai password`)
-        } else {
-            setName("")
-            setPassword("")
-        Alert.alert(`Đăng nhập thành công ${user.username} và ${user.password}`)
+    const handleLogin = async () => {
+        console.log(username, password);
+        try {
+          const res = await dispatch(login(username, password));
+          console.log('res', res);
+          if (res) {
+            console.log('login success');
+          }
+        } catch (e) {
+          Alert.alert('login error');
+          console.log('login error', e);
+        } finally {
         }
-    }
+      };
 
     const handlerpasswod= () => {
         dispatch(setSigin(3))
@@ -39,7 +37,7 @@ function Login() {
     return ( 
         <View style={styles.loginBottom}>
             <View style={{...styles.from}}>
-                    <MyInput icon="user" text="username" name={name} setName={setName}/>
+                    <MyInput icon="user" text="username" name={username} setName={setUserName}/>
                     <MyInput icon="lock1" text="password" name={password} setName={setPassword} eyes/>                    
                     <View style={styles.forgot}>
                         <TouchableOpacity onPress={handlerpasswod} >
@@ -48,8 +46,8 @@ function Login() {
                             </Text>
                         </TouchableOpacity>
                     </View>
-                    <Mybtn stylebtn={{...styles.btn_primary, marginTop:50, }} 
-                        styleText={styles.text_primary} title='sign in' handler={handlerLogin}/>  
+                    <MyButton stylebtn={{...styles.btn_primary, marginTop:50, }} 
+                        styleText={styles.text_primary} title='sign in' handler={handleLogin}/>  
             </View>
     
             <View style={{...styles.loginEnd, }}>

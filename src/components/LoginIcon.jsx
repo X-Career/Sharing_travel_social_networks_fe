@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {TouchableOpacity, Text, StyleSheet, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import {root} from '../styles'
+import {root} from './LoginStyle'
 
 function MyIcon(porps) {
 const handler = () => {
