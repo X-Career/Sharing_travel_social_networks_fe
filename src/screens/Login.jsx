@@ -17,7 +17,7 @@ const Login = () => {
     const handleLogin = async () => {
         console.log(username, password);
         try {
-          const res = await dispatch(login(username, password));
+          const res = await dispatch(login({username, password}));
           console.log('res', res);
           if (res) {
             console.log('login success');
