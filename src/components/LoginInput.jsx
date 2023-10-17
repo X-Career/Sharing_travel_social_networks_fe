@@ -1,18 +1,14 @@
 import React, { Component, useState } from 'react';
-import {View, Text, TextInput, Alert, StyleSheet} from 'react-native';
+import {View, Text, TextInput, Alert, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-
+import IconEye from 'react-native-vector-icons/FontAwesome';
 import {root} from './LoginStyle';
-import MyIcon from './LoginIcon';
+
 
 const Myinput = (props) => {
     
-    const [eye, setEye] = useState(props.eyes);
-    const type = eye ? true : false
-
-    const hanldeEye = () => {
-        setEye(!eye)
-    }
+  const [secureTextEntry, setSecureTextEntry] = useState(true)
+    
     return (
         <View style={{...styles.input}}>
                     <View style={{...styles.icon, backgroundColor:"#fff"}}>
@@ -21,18 +17,27 @@ const Myinput = (props) => {
                     </View>
                     <TextInput
                         style={styles.textinput}
-                        secureTextEntry={type}
+                        secureTextEntry={secureTextEntry}
                         onChangeText={props.setName}
                         value={props.name}
                         placeholder={props.text}
                     />
-                    { !props.eyes || <>
-                        {eye ?
-                        <MyIcon name="eye-slash" hanlder={hanldeEye}/>:
-                        <MyIcon name="eye" hanlder={hanldeEye}/> 
-                        }
-                    </>
+                    {
+                        props.suffixIcon == true ?
+                        <TouchableOpacity 
+                        onPress={() => setSecureTextEntry(state => !state)}
+                        >
+                          {
+                            secureTextEntry ?
+                            <IconEye name="eye-slash" size={20} color="#0072A5"/>
+                            :
+                            <IconEye name="eye" size={20} color="#0072A5"/>
+                          }
+                        </TouchableOpacity>
+                        :
+                        <></>
                     }
+                    
                 </View>
     )
 }

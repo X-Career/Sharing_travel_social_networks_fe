@@ -11,9 +11,10 @@
     "link": "react-native link",
     "dev": "source ~/.bash_profile&&react-native run-android",
     "postinstall": "patch-package",
-    "doctor" : "react-native doctor"
+    "doctor": "react-native doctor"
   },
   "dependencies": {
+    "@gluestack-ui/themed": "^1.0.6",
     "@react-native-community/checkbox": "^0.5.16",
     "@react-native-community/datetimepicker": "^7.6.0",
     "@react-navigation/bottom-tabs": "^6.5.9",

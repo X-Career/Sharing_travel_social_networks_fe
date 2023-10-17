@@ -9,14 +9,15 @@ import {
   Keyboard,
   Platform,
   ScrollView,
+  TouchableOpacity
 } from 'react-native';
 import styles from './profile.style';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {BackBtn, EditBtn, BirthdayForm, ChangeBtn} from '../components';
 import CheckBox from '@react-native-community/checkbox';
-
 import {Button} from '@rneui/themed';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { logout } from '../redux/features/auth/userSlice';
 
 import {useSelector, useDispatch} from 'react-redux';
 import {
@@ -41,6 +42,15 @@ const Profile = ({navigation}) => {
   const [showEdit, setShowEdit] = useState(false);
   const handleEdit = () => {
     setShowEdit(!showEdit);
+  };
+
+  const handleLogout = async () => {
+    try {
+      console.log('logout');
+      await dispatch(logout());
+    } catch (e) {
+      console.log('logout error');
+    }
   };
 
   return (
@@ -178,6 +188,10 @@ const Profile = ({navigation}) => {
 
               <View style={styles.wrapper}>
                 <Button radius={'md'} type="solid" title={'Change Password'} />
+              </View>
+              <View style={styles.wrapper}>
+              <Button radius={'md'} type="solid" title={'Logout'} onPress={handleLogout}/>
+
               </View>
             {/* </View> */}
           </View>
