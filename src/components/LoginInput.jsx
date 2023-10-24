@@ -17,7 +17,7 @@ const Myinput = (props) => {
                     </View>
                     <TextInput
                         style={styles.textinput}
-                        secureTextEntry={secureTextEntry}
+                        secureTextEntry={props.suffixIcon ? secureTextEntry : !secureTextEntry}
                         onChangeText={props.setName}
                         value={props.name}
                         placeholder={props.text}
