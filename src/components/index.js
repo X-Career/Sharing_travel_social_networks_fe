@@ -9,6 +9,8 @@ import CardImage from "./newfeed/CardImage";
 import Comments from "./newfeed/Comments";
 import Interact from "./newfeed/Interact";
 import Post from "./Post";
+import Myinput from "./LoginInput";
+import UsernameInput from "./UsernameInp";
 
 export {
     BackBtn,
@@ -22,4 +24,6 @@ export {
     Comments,
     Interact,
     Post,
+    Myinput,
+    UsernameInput
 }

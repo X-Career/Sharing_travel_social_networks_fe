@@ -1,8 +1,10 @@
 import axios from 'axios';
 import authHeader from './auth_header';
 
+
 // const API_URL = 'http://192.168.1.3:3000/';
 const API_URL = 'http://192.168.0.227:3000/'
+
 
 const register = async (username, email, password) => {
   const res = await axios.post(API_URL + 'auth/register', {
@@ -37,6 +39,27 @@ const login = async (username, password) => {
   }
   
 };
+
+const readProfile = async (avatar, fullname, username, email, gender, birthday, description)  => {
+  try {
+    const res = await axios.get(API_URL + 'current', {
+      avatar, fullname, username, email, gender, birthday, description
+    },
+      { headers: authHeader() }
+    )
+    const data = await res.json();
+
+    if (res.data) {
+      // return res.data
+      return data;
+    } else {
+      return 'Error read profile'
+    }
+  } catch (e) {
+    console.log('Catch error readProfile:', e)
+    throw(e)
+  }
+}
 
 const update = async (username, email, phone, address) => {
   try {
@@ -77,6 +100,7 @@ const authService = {
   login,
   update,
   logout,
+  readProfile
 };
 
 export default authService;

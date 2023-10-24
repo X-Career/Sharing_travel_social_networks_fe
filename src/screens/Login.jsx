@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import {View, Text, TouchableOpacity, Alert,} from 'react-native';
+import {View, Text, TouchableOpacity, TextInput,} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import { login } from '../redux/features/auth/userSlice';
 import styles, {root} from '../components/LoginStyle';
 import MyButton from '../components/LoginBtn';
-import MyInput from '../components/LoginInput';
+import {Myinput, UsernameInput} from '../components';
 
 
 
@@ -18,12 +18,13 @@ const Login = () => {
         console.log(username, password);
         try {
           const res = await dispatch(login({username, password}));
-          console.log('res', res);
+        //   console.log('res', res);
           if (res) {
             console.log('login success');
           }
         } catch (e) {
-          Alert.alert('login error');
+        //   Alert.alert('login error');
+        //   Alert.alert('Your account or password is incorrect');
           console.log('login error', e);
         } finally {
         }
@@ -37,8 +38,8 @@ const Login = () => {
     return ( 
         <View style={styles.loginBottom}>
             <View style={{...styles.from}}>
-                    <MyInput icon="user" text="username" name={username} setName={setUserName} suffixIcon={false}/>
-                    <MyInput icon="lock1" text="password" name={password} setName={setPassword} suffixIcon={true}/>                    
+                <UsernameInput icon="user" text="username" name={username} setName={setUserName} />
+                    <Myinput icon="lock1" text="password" name={password} setName={setPassword} suffixIcon={true}/>                    
                     <View style={styles.forgot}>
                         <TouchableOpacity onPress={handlerpasswod} >
                             <Text style={{...styles.text,color: root.mainColor,}}>
