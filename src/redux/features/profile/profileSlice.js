@@ -1,4 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { setMessage } from '../auth/message';
+import authService from '../../../services/auth_service';
+
 
 const initialState = {
     name: '',

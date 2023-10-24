@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -9,14 +9,15 @@ import {
   Keyboard,
   Platform,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import styles from './profile.style';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {BackBtn, EditBtn, BirthdayForm, ChangeBtn} from '../components';
 import CheckBox from '@react-native-community/checkbox';
-
 import {Button} from '@rneui/themed';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {logout} from '../redux/features/auth/userSlice';
 
 import {useSelector, useDispatch} from 'react-redux';
 import {
@@ -25,9 +26,9 @@ import {
   setBirthday,
   setDescription,
 } from '../redux/features/profile/profileSlice';
-import {COLORS} from '../constants';
+import {readProfile} from '../redux/features/auth/userSlice';
 
-import {SelectDropDown} from 'react-native-select-dropdown';
+import {COLORS} from '../constants';
 
 const Profile = ({navigation}) => {
   const [isSelected, setSelection] = useState(false);
@@ -38,9 +39,29 @@ const Profile = ({navigation}) => {
   const birthday = useSelector(state => state.profile.birthday);
   const description = useSelector(state => state.profile.description);
 
+  const user = useSelector(state => state.user.user);
+  const avatar = useSelector(state => state.user.user.avatar)
+  // console.log('log user data in profile:', user);
+  const defaultAvatar = require('../assets/images/default-avatar.jpg');
+  console.log('Avatar',avatar)
+
+  useEffect(() => {
+    dispatch(readProfile());
+  }, [dispatch]);
+
   const [showEdit, setShowEdit] = useState(false);
   const handleEdit = () => {
     setShowEdit(!showEdit);
+  };
+
+
+  const handleLogout = async () => {
+    try {
+      console.log('logout');
+      await dispatch(logout());
+    } catch (e) {
+      console.log('logout error');
+    }
   };
 
   return (
@@ -61,8 +82,7 @@ const Profile = ({navigation}) => {
         <View style={styles.botLayout}>
           <View style={styles.Img}>
             <Image
-              // source={{uri: 'https://randomuser.me/api/portraits/men/36.jpg'}}
-              source={require('../assets/images/profile.jpeg')}
+              source={avatar === '0' ? defaultAvatar : {uri: avatar}}
               style={styles.profileImg}
             />
             <ChangeBtn />
@@ -73,8 +93,8 @@ const Profile = ({navigation}) => {
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               <View>
-                <Text style={styles.fullName}>Antoni Shikota</Text>
-                <Text style={styles.email}>shikota@gmail.com</Text>
+                <Text style={styles.fullName}>{user.fullname}</Text>
+                <Text style={styles.email}>{user.email}</Text>
                 <View style={styles.wrapper}>
                   <TextInput
                     placeholder="Enter your full name"
@@ -121,6 +141,15 @@ const Profile = ({navigation}) => {
                 <View style={styles.wrapper}>
                   <TextInput
                     secureTextEntry
+                    placeholder="Enter old password"
+                    placeholderTextColor="#83829A"
+                    // value=""
+                    style={styles.longInput}
+                  />
+                </View>
+                <View style={styles.wrapper}>
+                  <TextInput
+                    secureTextEntry
                     placeholder="Enter new password"
                     placeholderTextColor="#83829A"
                     // value=""
@@ -128,7 +157,7 @@ const Profile = ({navigation}) => {
                   />
                 </View>
                 {/* <Button title={'Save'} /> */}
-                <View style={styles.wrapper}>
+                <View style={styles.wrapperBtn}>
                   <Button radius={'sm'} type="solid">
                     Save
                     <Icon
@@ -147,38 +176,47 @@ const Profile = ({navigation}) => {
         <View style={styles.botLayout}>
           <View style={styles.Img}>
             <Image
-              // source={{uri: 'https://randomuser.me/api/portraits/men/36.jpg'}}
-              source={require('../assets/images/profile.jpeg')}
+              source={avatar === '0' ? defaultAvatar : {uri: avatar}}
+
               style={styles.profileImg}
             />
           </View>
           <View style={styles.infoUser}>
-            <Text style={styles.fullName}>Antoni Shikota</Text>
-            <Text style={styles.email}>shikota@gmail.com</Text>
+            <Text style={styles.fullName}>{user.fullname}</Text>
+            <Text style={styles.email}>{user.email}</Text>
             <View style={[styles.wrapperShow, styles.checkBox]}>
               <Text style={styles.genderText}>Gender:</Text>
               <View style={styles.genderItems}>
-                <Text style={[styles.borderText, styles.desText]}>Male</Text>
+                <Text style={[styles.borderText, styles.desText]}>
+                  {user.gender}
+                </Text>
               </View>
             </View>
-
-            {/* <View style={styles.genderItems}> */}
-              <View style={[styles.wrapperShow, styles.wrapperDescription]}>
-                <ScrollView>
-                  <Text style={styles.desText}>
-                    Description Lorem ipsum dolor sit, amet consectetur
-                    adipisicing elit. Voluptas expedita quo ex asperiores
-                    excepturi recusandae quod perferendis laboriosam saepe
-                    voluptates.asperiores excepturi recusandae quod perferendis
-                    laboriosam saepe voluptates.asperiores excepturi recusandae
-                    quod perferendis laboriosam saepe voluptates.
-                  </Text>
-                </ScrollView>
+            <View style={[styles.wrapperShow, styles.checkBox]}>
+              <Text style={styles.genderText}>Birthday:</Text>
+              <View style={styles.genderItems}>
+                <Text style={[styles.borderText, styles.desText]}>
+                  {user.birthday}
+                </Text>
               </View>
+            </View>
+            <View style={[styles.wrapperShow, styles.wrapperDescription]}>
+              <ScrollView>
+                <Text style={styles.desText}>{user.description}</Text>
+              </ScrollView>
+            </View>
 
-              <View style={styles.wrapper}>
-                <Button radius={'md'} type="solid" title={'Change Password'} />
-              </View>
+            {/* <View style={styles.wrapper}>
+              <Button radius={'md'} type="solid" title={'Change Password'} />
+            </View> */}
+            <View style={styles.wrapperBtn}>
+              <Button
+                radius={'md'}
+                type="solid"
+                title={'Logout'}
+                onPress={handleLogout}
+              />
+            </View>
             {/* </View> */}
           </View>
         </View>

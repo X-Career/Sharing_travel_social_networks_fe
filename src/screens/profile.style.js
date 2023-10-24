@@ -80,7 +80,11 @@ const styles = StyleSheet.create({
     color: COLORS.black,
   },
   wrapper: {
-    marginTop: 15,
+    marginTop: 10,
+    width: SIZES.width - 50,
+  },
+  wrapperBtn: {
+    marginTop: 40,
     width: SIZES.width - 50,
   },
   longInput: {
@@ -120,7 +124,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.gray,
     // justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: COLORS.offwhite,
+    backgroundColor: COLORS.lightWhite,
     // marginHorizontal: 30,
     height: 60
     

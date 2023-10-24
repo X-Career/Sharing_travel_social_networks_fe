@@ -40,6 +40,25 @@ export const login = createAsyncThunk(
   },
 );
 
+export const readProfile = createAsyncThunk(
+  'current',
+  async ({ avatar, fullname, username, email, gender, birthday, description }, thunkAPI) => {
+    try {
+      const data = await authService.readProfile(avatar, fullname, username, email, gender, birthday, description);
+      const userData = await data.json()
+      // console.log('userData:', userData)
+      return userData;
+      // return {user: userData};
+    } catch (e) {
+      const message =
+      (e.response && e.response.data && e.response.data.message) ||
+      e.message ||
+      e.toString();
+    thunkAPI.dispatch(setMessage(message));
+    }
+  }
+)
+
 export const update = createAsyncThunk(
   'auth/update',
   async ({username, email, phone, address}, thunkAPI) => {
@@ -108,6 +127,13 @@ const authSlice = createSlice({
       .addCase(update.rejected, (state, action) => {
         console.error('Update rejected:', action.error);
       })
+
+      .addCase(readProfile.fulfilled, (state, action) => {
+        state.data = action.payload;
+      })
+      .addCase(readProfile.rejected, (state, action) => {
+        state.error = action.error.message;
+    })
   },
 });
 
