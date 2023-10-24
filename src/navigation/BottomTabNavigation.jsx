@@ -2,7 +2,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import  {COLORS}  from '../constants/index';
-import { Home, Profile, Search } from '../screens';
+import { Home, Profile, Search } from '../screens'
+import Post from '../screens/Post';
+import Reel from '../screens/Reel';
 
 const Tab = createBottomTabNavigator();
 
@@ -46,6 +48,36 @@ const BottomTabNavigation = () => {
             return (
               <Ionicons
                 name="search-sharp"
+                size={24}
+                color={focused ? COLORS.primary : COLORS.gray2}
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Post"
+        component={Post}
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <Ionicons
+                name={'add-circle-outline'}
+                size={24}
+                color={focused ? COLORS.primary : COLORS.gray2}
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Reel"
+        component={Reel}
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <Ionicons
+                name={'film-outline'}
                 size={24}
                 color={focused ? COLORS.primary : COLORS.gray2}
               />
