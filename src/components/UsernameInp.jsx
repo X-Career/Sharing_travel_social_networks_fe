@@ -5,9 +5,8 @@ import IconEye from 'react-native-vector-icons/FontAwesome';
 import {root} from './LoginStyle';
 
 
-const Myinput = (props) => {
+const UsernameInput = (props) => {
     
-  const [secureTextEntry, setSecureTextEntry] = useState(true)
     
     return (
         <View style={{...styles.input}}>
@@ -17,27 +16,10 @@ const Myinput = (props) => {
                     </View>
                     <TextInput
                         style={styles.textinput}
-                        secureTextEntry={props.suffixIcon ? secureTextEntry : !secureTextEntry}
                         onChangeText={props.setName}
                         value={props.name}
                         placeholder={props.text}
                     />
-                    {
-                        props.suffixIcon == true ?
-                        <TouchableOpacity 
-                        onPress={() => setSecureTextEntry(state => !state)}
-                        >
-                          {
-                            secureTextEntry ?
-                            <IconEye name="eye-slash" size={20} color="#0072A5"/>
-                            :
-                            <IconEye name="eye" size={20} color="#0072A5"/>
-                          }
-                        </TouchableOpacity>
-                        :
-                        <></>
-                    }
-                    
                 </View>
     )
 }
@@ -68,4 +50,4 @@ const styles = StyleSheet.create({
     },
 
 })
-export default Myinput;
+export default UsernameInput;
