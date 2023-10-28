@@ -14,6 +14,7 @@
     "doctor": "react-native doctor"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.2.6",
     "@gluestack-style/react": "^1.0.8",
     "@gluestack-ui/themed": "^1.0.6",
     "@react-native-community/checkbox": "^0.5.16",
