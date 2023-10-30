@@ -34,16 +34,12 @@ const Profile = ({navigation}) => {
   const [isSelected, setSelection] = useState(false);
 
   const dispatch = useDispatch();
-  const name = useSelector(state => state.profile.name);
-  const gender = useSelector(state => state.profile.gender);
-  const birthday = useSelector(state => state.profile.birthday);
-  const description = useSelector(state => state.profile.description);
+
 
   const user = useSelector(state => state.user.user);
-  const avatar = useSelector(state => state.user.user.avatar)
+  const avatar = useSelector(state => state.user.user.avatar);
   // console.log('log user data in profile:', user);
   const defaultAvatar = require('../assets/images/default-avatar.jpg');
-  console.log('Avatar',avatar)
 
   useEffect(() => {
     dispatch(readProfile());
@@ -53,7 +49,6 @@ const Profile = ({navigation}) => {
   const handleEdit = () => {
     setShowEdit(!showEdit);
   };
-
 
   const handleLogout = async () => {
     try {
@@ -99,7 +94,7 @@ const Profile = ({navigation}) => {
                   <TextInput
                     placeholder="Enter your full name"
                     placeholderTextColor="#83829A"
-                    value={name}
+                    // value={name}
                     style={styles.longInput}
                     onChangeText={text => dispatch(setName(text))}
                   />
@@ -177,7 +172,6 @@ const Profile = ({navigation}) => {
           <View style={styles.Img}>
             <Image
               source={avatar === '0' ? defaultAvatar : {uri: avatar}}
-
               style={styles.profileImg}
             />
           </View>

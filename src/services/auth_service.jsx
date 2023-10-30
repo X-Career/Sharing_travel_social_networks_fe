@@ -3,7 +3,10 @@ import authHeader from './auth_header';
 
 
 // const API_URL = 'http://192.168.1.3:3000/';
-const API_URL = 'http://192.168.0.227:3000/'
+// const API_URL = 'http://192.168.0.227:3000/'
+
+// Ip - Tinh
+const API_URL = 'http://192.168.1.25:3000/';
 
 
 const register = async (username, email, password) => {
