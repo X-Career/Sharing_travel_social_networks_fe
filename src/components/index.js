@@ -3,14 +3,15 @@ import EditBtn from "./EditBtn";
 import Button from './Button';
 import BirthdayForm from "./BirthdayForm";
 import ChangeBtn from "./ChangeBtn";
-import NewFeed from "./newfeed/NewFeed";
-import Account from "./newfeed/Account";
-import CardImage from "./newfeed/CardImage";
-import Comments from "./newfeed/Comments";
-import Interact from "./newfeed/Interact";
+import NewsFeed from "./newsfeed/NewsFeed";
+import Account from "./newsfeed/Account";
+import CardImage from "./newsfeed/CardImage";
+import Comments from "./newsfeed/Comments";
+import Interact from "./newsfeed/Interact";
 import Post from "./Post";
 import Myinput from "./LoginInput";
 import UsernameInput from "./UsernameInp";
+import Content from "./newsfeed/Content";
 
 export {
     BackBtn,
@@ -18,12 +19,13 @@ export {
     Button,
     BirthdayForm,
     ChangeBtn,
-    NewFeed,
+    NewsFeed,
     Account,
     CardImage,
     Comments,
     Interact,
     Post,
     Myinput,
-    UsernameInput
+    UsernameInput,
+    Content,
 }
