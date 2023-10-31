@@ -20,6 +20,7 @@ const Search = () => {
   // Hàm xử lý
   const handlerBlack = () => {
     navigation.navigate('Home')
+    setDataSearch([])
   }
   const handlerClear = () => {
     setValue('')
@@ -54,6 +55,7 @@ const Search = () => {
     const onPress = () => {
       // navigation.navigate('Profile')
       Alert.alert(`vào tài khoản profile ${props.username}`);
+      setDataSearch([])
     }
     return (
       <TouchableOpacity 
