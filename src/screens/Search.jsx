@@ -54,7 +54,7 @@ const Search = () => {
 
     const onPress = () => {
       // navigation.navigate('Profile')
-      Alert.alert(`vào tài khoản profile ${props.username}`);
+      navigation.navigate('Home')
       setDataSearch([])
     }
     return (
