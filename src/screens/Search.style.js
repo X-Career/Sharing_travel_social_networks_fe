@@ -6,15 +6,17 @@ const styles = StyleSheet.create({
     navigate: {
         flexDirection: 'row',
         backgroundColor: COLORS.primary,
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
         paddingLeft: 10,
-        paddingRight: 20, 
+        paddingRight: 10,
+        paddingBottom: 10
     },
     black: {
         height: 45,
         margin: 0,
-        marginBottom: 20
+        marginBottom: 20,
+        color: 'red'
     },
     search: {
         width: '80%',

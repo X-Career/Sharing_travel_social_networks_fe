@@ -1,4 +1,4 @@
-import { View, Text, TextInput, FlatList, TouchableOpacity, Image, Alert, SafeAreaView} from 'react-native'
+import { View, Text, TextInput, FlatList, TouchableOpacity, Image, SafeAreaView} from 'react-native'
 import React, {useEffect,} from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import axios from 'axios';
@@ -84,9 +84,9 @@ const Search = () => {
   return (
     <View style={{flex:1, color: '#000000'}}>
       <View style={styles.navigate}>
-          <View style={styles.black}>
+          {/* <View style={styles.black}>
             <BackBtn onPress={handlerBlack}/>
-          </View>
+          </View> */}
           <View style={styles.search}>
             <TextInput
               style={styles.input}
