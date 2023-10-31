@@ -56,7 +56,7 @@ const App = () => {
         headerShown: false,
       }}>
         {
-          !isLoggedIn 
+          isLoggedIn 
           ? <MainStack.Screen name='HomeScreen' component={HomeStackContainer}/>
           : <MainStack.Screen name='Auth' component={AuthStackContainer}/>
         }
