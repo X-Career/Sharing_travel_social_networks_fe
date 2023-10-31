@@ -12,11 +12,6 @@ const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
 
 
-  // useEffect(() => {
-  //   dispatch(fetchPosts());
-  //   console.log('Posts/Home/useEffect: ', posts)
-  // }, [dispatch]);
-
   useEffect(() => {
     dispatch(fetchPosts(page));
     setPage(page + 1);

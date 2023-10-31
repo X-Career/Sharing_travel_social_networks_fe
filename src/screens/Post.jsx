@@ -15,8 +15,11 @@ import auth_header from '../services/auth_header';
 import {BackBtn, EditBtn} from '../components';
 
 const Post = () => {
-  const API_URL = 'http://192.168.1.8:3000/';
+  // const API_URL = 'http://192.168.1.8:3000/';
   // const API_URL = 'http://192.168.0.227:3000/';
+
+  // Tinh ip
+  const API_URL = 'http://192.168.1.25:3000/';
 
   const navigatation = useNavigation();
   const [textNote, setTextNote] = useState('');
@@ -34,7 +37,7 @@ const Post = () => {
         uri: image.uri,
       }); 
     });
-    console.log(data);
+    // console.log(data);
 
     try {
       const res = await axios.post(
@@ -48,8 +51,8 @@ const Post = () => {
         },
       );
 
-      console.log('Axios response:', res.data);
-      console.log('data array image', res.data.post);
+      // console.log('Axios response:', res.data);
+      // console.log('data array image', res.data.post);
       handleCancel();
     } catch (e) {
       console.log('error: ', e);
@@ -68,11 +71,11 @@ const Post = () => {
         if (response.didCancel == true) {
           return;
         } else {
-          console.log('response', response);
+          // console.log('response', response);
           const selectedImages = response.assets.map(asset => asset);
           setImages(selectedImages);
         }
-        console.log('imagess', images);
+        // console.log('imagess', images);
       },
     );
   };
@@ -96,7 +99,7 @@ const Post = () => {
         <View style={{flex: 1}}>
           <EditBtn
             onPress={() => handleUploadPost(textNote, images)}
-            name="right"
+            name="progress-upload"
             style={styles.navigateButtonPost}
           />
         </View>
