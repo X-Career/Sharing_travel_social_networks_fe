@@ -1,7 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// const API_URL = 'http://192.168.1.25:3000/';
+
+//const API_URL = 'http://192.168.1.25:3000/';
+
+// minh
+const API_URL = 'http://192.168.1.8:3000/';
+
 
 // export const fetchPosts = createAsyncThunk('newsfeed/posts', async () => {
 //     const res = await axios.get(API_URL + 'newsfeed/posts');
@@ -12,10 +17,9 @@ import axios from 'axios';
 export const fetchPosts = createAsyncThunk(
     'newsfeed/posts',
     async (page) => {
-        // Tinh ip
-        const res = await fetch(`http://192.168.1.25:3000/newsfeed/posts?page=${page}`)
-        // Phuong ip
-        // const res = await fetch(`http://192.168.1.14:3000/newsfeed/posts?page=${page}`)
+
+        const res = await fetch(API_URL + `newsfeed/posts?page=${page}`)
+
         const data = await res.json();
         return {posts: data.posts, page};
     }
