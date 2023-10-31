@@ -32,18 +32,16 @@ import {COLORS} from '../constants';
 
 const Profile = ({navigation}) => {
   const [isSelected, setSelection] = useState(false);
+  
 
   const dispatch = useDispatch();
-  const name = useSelector(state => state.profile.name);
-  const gender = useSelector(state => state.profile.gender);
-  const birthday = useSelector(state => state.profile.birthday);
-  const description = useSelector(state => state.profile.description);
+
 
   const user = useSelector(state => state.user.user);
+  console.log('userinfo', user);
   const avatar = useSelector(state => state.user.user.avatar)
   // console.log('log user data in profile:', user);
   const defaultAvatar = require('../assets/images/default-avatar.jpg');
-  console.log('Avatar',avatar)
 
   useEffect(() => {
     dispatch(readProfile());
@@ -53,7 +51,6 @@ const Profile = ({navigation}) => {
   const handleEdit = () => {
     setShowEdit(!showEdit);
   };
-
 
   const handleLogout = async () => {
     try {
@@ -68,11 +65,11 @@ const Profile = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.topLayout}>
         <View style={styles.topTitle}>
-          <BackBtn onPress={() => navigation.goBack()} />
+          <BackBtn onPress={() => navigation.goBack()} name='back' />
           <Text style={styles.title}>Profile</Text>
           {/* <EditBtn onPress={handleEdit} /> */}
         </View>
-        <EditBtn onPress={handleEdit} />
+        <EditBtn onPress={handleEdit} name='edit'/>
         <View style={styles.subTopLayout}>
           <View style={styles.radiusLeft}></View>
           <View style={styles.radiusRight}></View>
@@ -81,10 +78,19 @@ const Profile = ({navigation}) => {
       {showEdit ? (
         <View style={styles.botLayout}>
           <View style={styles.Img}>
-            <Image
-              source={avatar === '0' ? defaultAvatar : {uri: avatar}}
+            {
+              avatar === '0' ? (
+                <Image
+              source={defaultAvatar}
               style={styles.profileImg}
             />
+              ) : (
+                <Image
+                source={{uri: avatar}}
+                style={styles.profileImg}
+              />
+              )
+            }
             <ChangeBtn />
           </View>
 
@@ -99,7 +105,7 @@ const Profile = ({navigation}) => {
                   <TextInput
                     placeholder="Enter your full name"
                     placeholderTextColor="#83829A"
-                    value={name}
+                    // value={name}
                     style={styles.longInput}
                     onChangeText={text => dispatch(setName(text))}
                   />
@@ -177,12 +183,11 @@ const Profile = ({navigation}) => {
           <View style={styles.Img}>
             <Image
               source={avatar === '0' ? defaultAvatar : {uri: avatar}}
-
               style={styles.profileImg}
             />
           </View>
           <View style={styles.infoUser}>
-            <Text style={styles.fullName}>{user.fullname}</Text>
+            <Text style={styles.fullName}>{user.username}</Text>
             <Text style={styles.email}>{user.email}</Text>
             <View style={[styles.wrapperShow, styles.checkBox]}>
               <Text style={styles.genderText}>Gender:</Text>
