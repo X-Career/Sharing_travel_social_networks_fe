@@ -12,29 +12,25 @@ const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
 
 
-  // useEffect(() => {
-  //   dispatch(fetchPosts());
-  //   console.log('Posts/Home/useEffect: ', posts)
-  // }, [dispatch]);
-
   useEffect(() => {
     dispatch(fetchPosts(page));
     setPage(page + 1);
-    console.log('Posts/Home/useEffect: ', posts);
+    // console.log('Posts/Home/useEffect: ', posts);
   }, [dispatch]);
 
   const handleLoadMore = () => {
     dispatch(fetchPosts(page));
     setPage(page + 1);
-    console.log('Posts/Home/LoadMore: ', posts);
+    // console.log('Posts/Home/LoadMore: ', posts);
   };
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     dispatch(fetchPosts(1)).then(() => setRefreshing(false));
     setPage(2);
-    console.log('Posts/Home/onRefresh: ', posts);
-  }, [dispatch, posts]);
+    // console.log('Posts/Home/onRefresh: ', posts);
+  // }, [dispatch, posts]);
+  }, [dispatch]);
 
   return (
     <SafeAreaView style={{backgroundColor: 'white'}}>
@@ -54,7 +50,7 @@ const Home = () => {
             return index.toString();
           }}
           onEndReached={handleLoadMore}
-          onEndReachedThreshold={0.1}
+          onEndReachedThreshold={0.5}
           renderItem={({item}) => <NewsFeed post={item} />}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
