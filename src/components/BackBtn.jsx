@@ -5,11 +5,11 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { COLORS } from '../constants';
 
 
-const BackBtn = ({onPress}) => {
+const BackBtn = ({onPress, name}) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.backBtn}>
           <AntDesign
-              name='back'
+              name={name}
               size={32}
               color={COLORS.white} />
 
