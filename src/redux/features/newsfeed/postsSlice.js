@@ -12,7 +12,7 @@ const API_URL = 'http://192.168.1.25:3000/';
 export const fetchPosts = createAsyncThunk(
     'newsfeed/posts',
     async (page) => {
-        const res = await fetch(`http://192.168.1.25:3000/newsfeed/posts?page=${page}`)
+        const res = await fetch(`http://192.168.1.14:3000/newsfeed/posts?page=${page}`)
         const data = await res.json();
         return {posts: data.posts, page};
     }
