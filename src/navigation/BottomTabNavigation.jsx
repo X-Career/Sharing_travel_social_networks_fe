@@ -33,7 +33,7 @@ const BottomTabNavigation = () => {
             return (
               <Ionicons
                 name={focused ? 'home' : 'home-outline'}
-                size={24}
+                size={20}
                 color={focused ? COLORS.primary : COLORS.gray2}
               />
             );
@@ -48,7 +48,7 @@ const BottomTabNavigation = () => {
             return (
               <Ionicons
                 name="search-sharp"
-                size={24}
+                size={20}
                 color={focused ? COLORS.primary : COLORS.gray2}
               />
             );
@@ -63,7 +63,7 @@ const BottomTabNavigation = () => {
             return (
               <Ionicons
                 name={'add-circle-outline'}
-                size={24}
+                size={40}
                 color={focused ? COLORS.primary : COLORS.gray2}
               />
             );
@@ -78,7 +78,7 @@ const BottomTabNavigation = () => {
             return (
               <Ionicons
                 name={'film-outline'}
-                size={24}
+                size={20}
                 color={focused ? COLORS.primary : COLORS.gray2}
               />
             );
@@ -93,7 +93,7 @@ const BottomTabNavigation = () => {
             return (
               <Ionicons
                 name={focused ? 'person' : 'person-outline'}
-                size={24}
+                size={20}
                 color={focused ? COLORS.primary : COLORS.gray2}
               />
             );
