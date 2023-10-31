@@ -2,31 +2,39 @@ import { View, Text, TextInput, FlatList, TouchableOpacity, Image, Alert, SafeAr
 import React, {useEffect,} from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
+
 import BackBtn from '../components/BackBtn'
 import styles from './Search.style.js'
 import { COLORS } from '../constants';
 
 
 const Search = () => {
-  const [text, onChangeText] = React.useState('');
+  const [value, setValue] = React.useState('');
   const [searchResult, setSearchResult] = React.useState([]);
   const [data, setData] = React.useState([])
   const [dataSearch, setDataSearch] = React.useState([])
 
+  const navigation = useNavigation()
+
   // Hàm xử lý
   const handlerBlack = () => {
-    // Alert.alert(`Vê trang Home`)
-    console.log(`Ve trang Home`);
+    navigation.navigate('Home')
   }
-  const handlerDelete = () => {
-    onChangeText('')
+  const handlerClear = () => {
+    setValue('')
+    setDataSearch([])
   }
   
+  //Hàm tìm kiếm
+  const searchData = ({data, value}) => {
+    if (value === '') {return []}
+    else {
+      return data.filter(item => item.username.includes(value))
+    }
+  }
   // hàm render
   useEffect(() => {
-    // setTimeout(() => {
-    //   searchResult([1,1,1,1])
-    // }, 0)
 
     axios.get('https://jsonplaceholder.typicode.com/users')
     .then(function (response) {
@@ -36,19 +44,23 @@ const Search = () => {
       console.log(error);
     });
 
-    setDataSearch([...data.slice(0, 9)])
-  },[]);
+    setDataSearch(searchData({data, value}))
+  },[value]);
 
   const Item = ({props}) => {
     const title = props.username? props.username : props.title
     const url = props.url? props.url : 'https://baoninhbinh.org.vn//DATA/ARTICLES/2021/5/17/cuoc-dua-lot-vao-top-100-anh-dep-di-san-van-hoa-va-thien-7edf3.jpg'
 
     const onPress = () => {
-      // Alert.alert(`vào tài khoản ${props.id}`)
-      console.log(`vào tài khoản ${props.id}`);
+      // navigation.navigate('Profile')
+      Alert.alert(`vào tài khoản profile ${props.username}`);
     }
     return (
-      <TouchableOpacity style={styles.item} onPress={onPress}>
+      <TouchableOpacity 
+        style={styles.item} 
+        onPress={onPress}
+        key={props.id}
+      >
           <View style={styles.item_list}>
               <Image 
                 style={styles.img}
@@ -76,12 +88,12 @@ const Search = () => {
           <View style={styles.search}>
             <TextInput
               style={styles.input}
-              onChangeText={onChangeText}
-              value={text}
+              onChangeText={setValue}
+              value={value}
               placeholder='Search'
             />
-            {text !== null &&
-            <TouchableOpacity style={styles.item_list} onPress={handlerDelete}> 
+            {!!value &&
+            <TouchableOpacity style={styles.item_list} onPress={handlerClear}> 
                 <AntDesign
                   name='close'
                   size={18}
@@ -97,6 +109,9 @@ const Search = () => {
             <FlatList
                 data = {dataSearch}
                 renderItem={({item})=> <Item props={item}/>}
+                keyExtractor={item => item.id}
+                extraData={searchResult}
+                // initialNumToRender={0}
             />
       </SafeAreaView>
     </View>
