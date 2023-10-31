@@ -4,7 +4,7 @@ import { CheckBox, Icon } from '@rneui/themed';
 import styles from './interact.style.js'
 
 const Interact = () => {
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
   const toggleCheckbox = () => setChecked(!checked);
   return (
     <View style={styles.container}>

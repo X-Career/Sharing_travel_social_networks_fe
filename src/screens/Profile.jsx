@@ -27,20 +27,15 @@ import {
   setDescription,
 } from '../redux/features/profile/profileSlice';
 import {readProfile} from '../redux/features/auth/userSlice';
-
 import {COLORS} from '../constants';
 
 const Profile = ({navigation}) => {
-  const [isSelected, setSelection] = useState(false);
-  
-
   const dispatch = useDispatch();
-
+  const [isSelected, setSelection] = useState(false);
 
   const user = useSelector(state => state.user.user);
-  console.log('userinfo', user);
+  // console.log('Profile: ', user);
   const avatar = useSelector(state => state.user.user.avatar)
-  // console.log('log user data in profile:', user);
   const defaultAvatar = require('../assets/images/default-avatar.jpg');
 
   useEffect(() => {
@@ -63,19 +58,20 @@ const Profile = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      {showEdit ? (
+        <>
       <View style={styles.topLayout}>
         <View style={styles.topTitle}>
           <BackBtn onPress={() => navigation.goBack()} name='back' />
           <Text style={styles.title}>Profile</Text>
           {/* <EditBtn onPress={handleEdit} /> */}
         </View>
-        <EditBtn onPress={handleEdit} name='edit'/>
+        <EditBtn onPress={handleEdit} name='account-cancel'/>
         <View style={styles.subTopLayout}>
           <View style={styles.radiusLeft}></View>
           <View style={styles.radiusRight}></View>
         </View>
       </View>
-      {showEdit ? (
         <View style={styles.botLayout}>
           <View style={styles.Img}>
             {
@@ -177,8 +173,22 @@ const Profile = ({navigation}) => {
               </View>
             </TouchableWithoutFeedback>
           </KeyboardAvoidingView>
-        </View>
+          </View>
+          </>
       ) : (
+          <>
+        <View style={styles.topLayout}>
+        <View style={styles.topTitle}>
+          <BackBtn onPress={() => navigation.goBack()} name='back' />
+          <Text style={styles.title}>Profile</Text>
+          {/* <EditBtn onPress={handleEdit} /> */}
+        </View>
+        <EditBtn onPress={handleEdit} name='account-edit-outline'/>
+        <View style={styles.subTopLayout}>
+          <View style={styles.radiusLeft}></View>
+          <View style={styles.radiusRight}></View>
+        </View>
+      </View>
         <View style={styles.botLayout}>
           <View style={styles.Img}>
             <Image
@@ -187,7 +197,7 @@ const Profile = ({navigation}) => {
             />
           </View>
           <View style={styles.infoUser}>
-            <Text style={styles.fullName}>{user.username}</Text>
+            <Text style={styles.fullName}>{user.fullname}</Text>
             <Text style={styles.email}>{user.email}</Text>
             <View style={[styles.wrapperShow, styles.checkBox]}>
               <Text style={styles.genderText}>Gender:</Text>
@@ -224,7 +234,8 @@ const Profile = ({navigation}) => {
             </View>
             {/* </View> */}
           </View>
-        </View>
+            </View>
+            </>
       )}
     </SafeAreaView>
   );
