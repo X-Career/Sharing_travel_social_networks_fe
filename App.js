@@ -42,7 +42,7 @@ const HomeStackContainer = () => {
 
 const App = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
-  console.log('isLoggedIn', isLoggedIn);
+  // console.log('isLoggedIn', isLoggedIn);
   React.useEffect(() => {
     StatusBar.setBackgroundColor(COLORS.primary, true);
 

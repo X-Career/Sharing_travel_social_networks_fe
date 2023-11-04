@@ -2,20 +2,22 @@ import { View, Text } from 'react-native';
 import React from 'react';
 import { ListItem, Avatar } from '@rneui/themed';
 import styles from './account.style.js';
+import {formatDistanceToNow } from 'date-fns';
 
 
-const Account = () => {
+const Account = ({username, avatar, createdAt}) => {
   return (
     <ListItem>
       <Avatar
         size={40}
         rounded
         // source={require('../../assets/images/profile.jpeg')}
-        source={{uri: 'https://randomuser.me/api/portraits/men/36.jpg'}}
+        // source={{uri: 'https://randomuser.me/api/portraits/men/36.jpg'}}
+        source={{uri: avatar}}
       />
       <ListItem.Content style={styles.content}>
-        <ListItem.Title  style={styles.title}>John Schema</ListItem.Title>
-        <ListItem.Subtitle style={styles.subTitle}>2h ago</ListItem.Subtitle>
+        <ListItem.Title  style={styles.title}>{username}</ListItem.Title>
+        <ListItem.Subtitle style={styles.subTitle}>{formatDistanceToNow(new Date(createdAt))} ago</ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>
   )

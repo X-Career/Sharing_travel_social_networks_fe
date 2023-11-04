@@ -1,18 +1,15 @@
 import axios from 'axios';
 import authHeader from './auth_header';
 
-
-
+// Ip - Minh
 // const API_URL = 'http://192.168.1.8:3000/';
 // const API_URL = 'http://192.168.0.227:3000/'
 
 // Ip - Tinh
 const API_URL = 'http://192.168.1.25:3000/';
 
-//Ip -Phương
+//Ip - Phương
 // const API_URL = 'http://192.168.1.14:3000/'
-
-
 
 const register = async (username, email, password) => {
   const res = await axios.post(API_URL + 'auth/register', {
@@ -23,7 +20,7 @@ const register = async (username, email, password) => {
 };
 
 const login = async (username, password) => {
-  console.log('login',username, password);
+  console.log('Auth login:', username, password);
   try {
     const res = await axios.post(API_URL + 'auth/login', {
       username,
@@ -37,61 +34,94 @@ const login = async (username, password) => {
     }
   } catch (error) {
     if (error.response) {
-      console.error('Login error: Server responded with status', error.response.status);
+      console.error(
+        'Login error: Server responded with status',
+        error.response.status,
+      );
     } else if (error.request) {
-      console.error('Login error: Request was made but no response was received', error.request);
+      console.error(
+        'Login error: Request was made but no response was received',
+        error.request,
+      );
     } else {
       console.error('Login error:', error.message);
     }
     throw error;
   }
-  
 };
 
-const readProfile = async (avatar, fullname, username, email, gender, birthday, description)  => {
+const readProfile = async (
+  avatar,
+  fullname,
+  username,
+  email,
+  gender,
+  birthday,
+  description,
+) => {
   try {
-    const res = await axios.get(API_URL + 'current', {
-      avatar, fullname, username, email, gender, birthday, description
-    },
-      { headers: authHeader() }
-    )
+    const res = await axios.get(
+      API_URL + 'current',
+      {
+        avatar,
+        fullname,
+        username,
+        email,
+        gender,
+        birthday,
+        description,
+      },
+      {headers: authHeader()},
+    );
     const data = await res.json();
 
     if (res.data) {
       // return res.data
       return data;
     } else {
-      return 'Error read profile'
+      return 'Error read profile';
     }
   } catch (e) {
-    console.log('Catch error readProfile:', e)
-    throw(e)
+    console.log('Catch error readProfile:', e);
+    throw e;
   }
-}
+};
 
-const update = async (username, email, phone, address) => {
+const update = async (
+  username,
+  email,
+  fullname,
+  gender,
+  birthday,
+  description,
+) => {
   try {
-    console.log('updateee');
-    const res = await axios.patch(API_URL + 'user/update', {
-      username,
-      email,
-      phone,
-      address
-    },
-    {headers: authHeader() }
-    )
-    console.log('update res', res);
+    console.log('updateee slice:');
+    const res = await axios.patch(
+      API_URL + 'user/update',
+      {
+        username,
+        email,
+        fullname,
+        gender,
+        birthday,
+        description,
+      },
+      {headers: authHeader()},
+    );
+    // console.log('Auth update res: ', res);
     if (res.data) {
-      return res.data
+      console.log('Auth update res.data: ', res.data);
+      return res.data;
     } else {
       console.log('update errorr');
-      return 
+      return;
     }
   } catch (error) {
     console.log('update errorrr', error);
-    throw error
+    throw error;
   }
-}
+};
 
 const logout = async () => {
   try {
@@ -108,7 +138,7 @@ const authService = {
   login,
   update,
   logout,
-  readProfile
+  readProfile,
 };
 
 export default authService;
