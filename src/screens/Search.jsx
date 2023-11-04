@@ -1,12 +1,23 @@
-import { View, Text, TextInput, FlatList, TouchableOpacity, Image, SafeAreaView} from 'react-native'
+import { View, 
+  Text, 
+  TextInput, 
+  FlatList, 
+  TouchableOpacity, 
+  Image, 
+  SafeAreaView, 
+  TouchableWithoutFeedback, 
+  KeyboardAvoidingView, 
+  Keyboard,
+  Platform,
+} from 'react-native'
 import React, {useEffect,} from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
-
 import BackBtn from '../components/BackBtn'
 import styles from './Search.style.js'
 import { COLORS } from '../constants';
+import { useDebounce } from '../Hooks';
 
 
 const Search = () => {
@@ -34,9 +45,9 @@ const Search = () => {
       return data.filter(item => item.username.includes(value))
     }
   }
+  const debounce = useDebounce(value, 300)
   // hàm render
   useEffect(() => {
-
     axios.get('https://jsonplaceholder.typicode.com/users')
     .then(function (response) {
       setData(response.data);
@@ -46,7 +57,7 @@ const Search = () => {
     });
 
     setDataSearch(searchData({data, value}))
-  },[value]);
+  },[debounce]);
 
   const Item = ({props}) => {
     const title = props.username? props.username : props.title
@@ -56,6 +67,7 @@ const Search = () => {
       // navigation.navigate('Profile')
       navigation.navigate('Home')
       setDataSearch([])
+      setValue('')
     }
     return (
       <TouchableOpacity 
@@ -83,29 +95,40 @@ const Search = () => {
   }
   return (
     <View style={{flex:1, color: '#000000'}}>
-      <View style={styles.navigate}>
-          {/* <View style={styles.black}>
-            <BackBtn onPress={handlerBlack}/>
-          </View> */}
-          <View style={styles.search}>
-            <TextInput
-              style={styles.input}
-              onChangeText={setValue}
-              value={value}
-              placeholder='Search'
-            />
-            {!!value &&
-            <TouchableOpacity style={styles.item_list} onPress={handlerClear}> 
-                <AntDesign
-                  name='close'
-                  size={18}
-                  color={COLORS.black} />
-               
-            </TouchableOpacity>
-                }
-
-          </View>          
-      </View>
+      <KeyboardAvoidingView 
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      >
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.navigate}>
+              <View style={styles.black}>
+                <TouchableOpacity onPress={handlerBlack}>
+                      <AntDesign
+                          name='back'
+                          size={32}
+                          color={COLORS.white} />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.search}>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={setValue}
+                  value={value}
+                  placeholder='Search'
+                />
+                <View style={styles.clear}>
+                  {!!value &&
+                  <TouchableOpacity style={styles.item_icon} onPress={handlerClear}> 
+                      <AntDesign
+                        name='close'
+                        size={20}
+                        color={COLORS.black} />                
+                  </TouchableOpacity>
+                      }
+                </View>
+              </View>
+            </View>
+          </TouchableWithoutFeedback>          
+      </KeyboardAvoidingView>
 
       <SafeAreaView style={styles.list}>
             <FlatList

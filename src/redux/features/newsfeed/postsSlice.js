@@ -5,7 +5,10 @@ import axios from 'axios';
 //const API_URL = 'http://192.168.1.25:3000/';
 
 // minh
-const API_URL = 'http://192.168.1.8:3000/';
+// const API_URL = 'http://192.168.1.8:3000/';
+
+// phuong
+const API_URL = 'http://192.168.1.14:3000/';
 
 
 // export const fetchPosts = createAsyncThunk('newsfeed/posts', async () => {

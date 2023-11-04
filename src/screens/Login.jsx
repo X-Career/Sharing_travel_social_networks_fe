@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import {View, Text, TouchableOpacity, TextInput,} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+
 import { login } from '../redux/features/auth/userSlice';
 import styles, {root} from '../components/LoginStyle';
 import MyButton from '../components/LoginBtn';
@@ -14,6 +16,8 @@ const Login = () => {
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     
+    const navigation = useNavigation()
+
     const handleLogin = async () => {
         console.log(username, password);
         try {
@@ -23,17 +27,17 @@ const Login = () => {
             console.log('login success');
           }
         } catch (e) {
-        //   Alert.alert('login error');
-        //   Alert.alert('Your account or password is incorrect');
           console.log('login error', e);
         } finally {
         }
       };
 
     const handlerpasswod= () => {
-        dispatch(setSigin(3))
+        navigation.navigate('Forgot')
     }
-    const handler= () => {dispatch(setSigin(2))}
+    const handler= () => {
+        navigation.navigate('Register')
+    }
     
     return ( 
         <View style={styles.loginBottom}>
