@@ -6,17 +6,18 @@ const styles = StyleSheet.create({
     navigate: {
         flexDirection: 'row',
         backgroundColor: COLORS.primary,
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
         paddingLeft: 10,
-        paddingRight: 10,
+        paddingRight: 20,
         paddingBottom: 10
     },
     black: {
-        height: 45,
-        margin: 0,
-        marginBottom: 20,
-        color: 'red'
+        // backgroundColor: 'red',
+        width: '15%',
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     search: {
         width: '80%',
@@ -48,15 +49,24 @@ const styles = StyleSheet.create({
         marginVertical: 5
     },
     item_list: {
-        flexDirection: 'row',
         alignItems: 'center',
+        flexDirection: 'row'
+    },
+    item_icon: {
+        alignItems: 'center',
+        position: 'absolute'
     },
     img: {
         width: 25,
         height: 25,
         borderRadius: 12.5,
         marginRight: 10
+    },
+    clear: {
+        justifyContent: 'center',
+        alignItems: 'center'
     }
+
 });
 
 export default styles

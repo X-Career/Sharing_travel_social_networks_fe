@@ -5,6 +5,8 @@ import BottomTabNavigation from './src/navigation/BottomTabNavigation';
 import { StatusBar } from 'react-native';
 import { COLORS } from './src/constants';
 import Login from './src/screens/Login';
+import Register from './src/screens/Register';
+import Forgot from './src/screens/Forgot';
 import { useSelector } from 'react-redux';
 import { config, GluestackUIProvider } from '@gluestack-ui/themed';
 
@@ -19,7 +21,9 @@ const AuthStackContainer = () => {
       headerShown: false,
     }}>
       <AuthStack.Screen name='Login' component={Login} />
-      {/* <AuthStack.Screen name='Register' component={Register} /> */}
+      <AuthStack.Screen name='Register' component={Register} />
+      <AuthStack.Screen name='Forgot' component={Forgot} />
+
     </AuthStack.Navigator>
   )
 }
