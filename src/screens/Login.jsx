@@ -19,7 +19,7 @@ const Login = () => {
     const navigation = useNavigation()
 
     const handleLogin = async () => {
-        console.log(username, password);
+        // console.log('Login account: ', username, password);
         try {
           const res = await dispatch(login({username, password}));
         //   console.log('res', res);

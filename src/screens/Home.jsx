@@ -26,11 +26,11 @@ const Home = () => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
+    setPage(1)
     dispatch(fetchPosts(1)).then(() => setRefreshing(false));
-    setPage(2);
+    // setPage(2);
     // console.log('Posts/Home/onRefresh: ', posts);
-  // }, [dispatch, posts]);
-  }, [dispatch]);
+}, [dispatch]);
 
   return (
     <SafeAreaView style={{backgroundColor: 'white'}}>
