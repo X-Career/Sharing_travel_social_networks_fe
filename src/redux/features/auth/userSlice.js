@@ -41,7 +41,7 @@ export const login = createAsyncThunk(
 );
 
 export const readProfile = createAsyncThunk(
-  'current',
+  'auth/current',
   async ({ avatar, fullname, username, email, gender, birthday, description }, thunkAPI) => {
     try {
       const data = await authService.readProfile(avatar, fullname, username, email, gender, birthday, description);
@@ -61,10 +61,11 @@ export const readProfile = createAsyncThunk(
 
 export const update = createAsyncThunk(
   'auth/update',
-  async ({username, email, fullname, gender, description, birthday}, thunkAPI) => {
+  async ({fullname, gender, description, birthday, avatar}, thunkAPI) => {
     try {
-      const data = await authService.update(username, email, fullname, gender, description, birthday);
+      const data = await authService.update(fullname, gender, description, birthday, avatar);
       console.log('Slice update data', data);
+      console.log('Slice update data.data', data.data);
       return {user: data}
       // return  data
     } catch (e) {
@@ -123,15 +124,15 @@ const authSlice = createSlice({
         state.user = null;
       })
       .addCase(update.fulfilled, (state, action) => {
-        // state.user = action.payload.user
-        state.user = action.payload
+        state.user = action.payload.user
+        // state.user = action.payload
       })
       .addCase(update.rejected, (state, action) => {
         console.error('Update rejected:', action.error);
       })
 
       .addCase(readProfile.fulfilled, (state, action) => {
-        state.data = action.payload;
+        state.user = action.payload;
       })
       .addCase(readProfile.rejected, (state, action) => {
         state.error = action.error.message;

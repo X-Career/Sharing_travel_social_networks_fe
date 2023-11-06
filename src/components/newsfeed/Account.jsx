@@ -9,11 +9,14 @@ const Account = ({username, avatar, createdAt}) => {
   return (
     <ListItem>
       <Avatar
-        size={40}
+        size={50}
         rounded
         // source={require('../../assets/images/profile.jpeg')}
         // source={{uri: 'https://randomuser.me/api/portraits/men/36.jpg'}}
-        source={{uri: avatar}}
+        source={{ uri: avatar }}
+        containerStyle={{
+          marginStart: -5
+        }}
       />
       <ListItem.Content style={styles.content}>
         <ListItem.Title  style={styles.title}>{username}</ListItem.Title>

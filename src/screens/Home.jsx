@@ -50,7 +50,7 @@ const Home = () => {
             return index.toString();
           }}
           onEndReached={handleLoadMore}
-          onEndReachedThreshold={0.5}
+          onEndReachedThreshold={0.9}
           renderItem={({item}) => <NewsFeed post={item} />}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
