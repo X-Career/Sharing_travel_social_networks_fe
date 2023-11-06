@@ -18,55 +18,64 @@ import {BackBtn, EditBtn, BirthdayForm, ChangeBtn} from '../components';
 import CheckBox from '@react-native-community/checkbox';
 import {Button} from '@rneui/themed';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {logout} from '../redux/features/auth/userSlice';
+import {logout,update,readProfile} from '../redux/features/auth/userSlice';
 import {useSelector, useDispatch} from 'react-redux';
-import {readProfile} from '../redux/features/auth/userSlice';
-import {update} from '../redux/features/auth/userSlice';
 import {COLORS} from '../constants';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
 const Profile = ({navigation}) => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user.user);
-  // console.log('Profile: ', user);
-  const avatar = useSelector(state => state.user.user.avatar);
-  console.log('Avatar: ', avatar);
-  // const defaultAvatar = require('../assets/images/default-avatar.jpg');
+  const user = useSelector(state => state.auth.user) || {};
 
+  const updateUser = useSelector(state => state.auth.user);
   const [isSelected, setSelection] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
 
-  const [input, setInput] = useState({
-    fullname: '',
-    gender: '',
-    birthday: '',
-    description: '',
-    oldPassword: '',
-    newPassword: '',
-    repeatNewPassword: '',
-  });
+
 
   const formik = useFormik({
+    // initailValues: updateUser,
     initialValues: {
       fullname: '',
       gender: '',
-      birthday: '',
+      birthday:  '',
       description: '',
-      oldPassword: '',
-      newPassword: '',
+      avatar: '',
+      // oldPassword: '',
+      // newPassword: '',
     },
     validationSchema: Yup.object({
       fullname: Yup.string(),
       gender: Yup.string(),
       birthday: Yup.string(),
       description: Yup.string(),
-      oldPassword: Yup.string(),
-      newPassword: Yup.string(),
+      avatar: Yup.string(),
+      // oldPassword: Yup.string(),
+      // newPassword: Yup.string(),
     }),
-    onSubmit: values => {
-      dispatch(update(values));
+    onSubmit: (values, {setSubmitting, setErrors}) => {
+      const updateValues = Object.keys(values).reduce((acc, key) => {
+        if (values[key] !== '') {
+          acc[key] = values[key]
+        }
+        return acc;
+      }, {})
+
+      dispatch(update(updateValues))
+      // dispatch(update(values))
+        .then(() => {
+          console.log('handle onSubmit success')
+        setSubmitting(false)
+        })
+        .catch(error => {
+          console.log('Error submit:', error.message)
+          setErrors({submit: error.message})
+          setSubmitting(false)
+        })
       console.log('Profile/update formik:', values);
+      console.log('Profile/updateValues formik:', updateValues);
+      
     },
   });
 
@@ -87,26 +96,6 @@ const Profile = ({navigation}) => {
     }
   };
 
-  const handleOnChange = (key, value) => {
-    setInput({...input, [key]: value});
-    console.log('Handle Input: ', key, value);
-  };
-
-  const handleSubmit = () => {
-    const updateInput = Object.keys(input).reduce((acc, key) => {
-      if (input[key] !== '') {
-        acc[key] = input[key];
-      }
-      return acc;
-    }, {});
-    dispatch(update(updateInput));
-    //   .then(() => {
-    //   navigation.navigate('Profile')
-    //   // navigation.pop();
-    //   // navigation.push('Profile');
-    // });
-    console.log('Profile/update:', updateInput);
-  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -164,6 +153,8 @@ const Profile = ({navigation}) => {
                         tintColors={{true: COLORS.green, false: COLORS.red}}
                         value={isSelected}
                         onValueChange={setSelection}
+
+
                       />
                       <Text style={styles.desText}>Male</Text>
                     </View>
@@ -173,6 +164,7 @@ const Profile = ({navigation}) => {
                         tintColors={{true: COLORS.green, false: COLORS.red}}
                         value={!isSelected}
                         onValueChange={newValue => setSelection(!newValue)}
+
                       />
                       <Text style={styles.desText}>Female</Text>
                     </View>

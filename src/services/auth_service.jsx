@@ -1,19 +1,13 @@
 import axios from 'axios';
 import authHeader from './auth_header';
+import { API_URL } from '@env';
 
-// Ip - Minh
-// const API_URL = 'http://192.168.1.8:3000/';
-// const API_URL = 'http://192.168.0.227:3000/'
+console.log('auth API_URL: ',API_URL)
 
-// Ip - Tinh
-// const API_URL = 'http://192.168.1.25:3000/';
-
-//Ip - Phương
-// const API_URL = 'http://192.168.1.14:3000/'
 
 
 const register = async (username, email, password) => {
-  const res = await axios.post(API_URL + 'auth/register', {
+  const res = await axios.post(`${API_URL}/auth/register`, {
     username,
     email,
     password,
@@ -23,7 +17,8 @@ const register = async (username, email, password) => {
 const login = async (username, password) => {
   console.log('Auth login:', username, password);
   try {
-    const res = await axios.post(API_URL + 'auth/login', {
+    // const res = await axios.post(API_URL + 'auth/login', {
+    const res = await axios.post(`${API_URL}/auth/login`, {
       username,
       password,
     });
@@ -51,31 +46,17 @@ const login = async (username, password) => {
   }
 };
 
-const readProfile = async (
-  avatar,
-  fullname,
-  username,
-  email,
-  gender,
-  birthday,
-  description,
+const readProfile = async (avatar, fullname, username, email, gender, birthday, description,
 ) => {
   try {
     const res = await axios.get(
-      API_URL + 'current',
-      {
-        avatar,
-        fullname,
-        username,
-        email,
-        gender,
-        birthday,
-        description,
-      },
+      `${API_URL}/current`,
+      {avatar, fullname, username, email, gender, birthday, description, },
       {headers: authHeader()},
     );
     const data = await res.json();
-
+    console.log('headers(): ', authHeader())
+      console.log('Auth readProfile: ', res.headers)
     if (res.data) {
       // return res.data
       return data;
@@ -88,39 +69,42 @@ const readProfile = async (
   }
 };
 
-const update = async (
-  username,
-  email,
-  fullname,
-  gender,
-  birthday,
-  description,
-) => {
+const update = async (  avatar,  fullname, gender,  birthday,  description,) => {
   try {
-    console.log('updateee slice:');
+    const headers = authHeader();
+    console.log('request headers: ', headers)
     const res = await axios.patch(
-      API_URL + 'user/update',
-      {
-        username,
-        email,
-        fullname,
-        gender,
-        birthday,
-        description,
-      },
-      {headers: authHeader()},
+      `${API_URL}/user/update`,
+      { avatar, fullname, gender, birthday, description, },
+      // {headers: authHeader()},
+      { headers: headers },
     );
-    // console.log('Auth update res: ', res);
+    console.log('Auth update res: ', res);
+    console.log('Res header: ', res.headers)
     if (res.data) {
       console.log('Auth update res.data: ', res.data);
       return res.data;
     } else {
-      console.log('update errorr');
+      console.log('update error else');
       return;
     }
   } catch (error) {
-    console.log('update errorrr', error);
+    if (error.response) {
+      console.log('Err res data:', error.response.data);
+      console.log('Err res status:', error.response.status);
+      console.log('Err res headers:', error.response.headers);
+    } else if (error.request) {
+      console.log('Err request:', error.request)
+    } else {
+      console.log('Err message: ', error.message)
+    }
+    console.log('Err config: ', error.config);
     throw error;
+
+
+    // console.log('update error:', error);
+    // console.log('update error:', error.message);
+    // throw error;
   }
 };
 
