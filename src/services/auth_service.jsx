@@ -10,7 +10,7 @@ import authHeader from './auth_header';
 // const API_URL = 'http://192.168.1.25:3000/';
 
 //Ip -Phương
-const API_URL = 'http://192.168.1.14:3000/'
+export const API_URL = 'http://192.168.1.14:3000/'
 
 
 
@@ -108,7 +108,7 @@ const authService = {
   login,
   update,
   logout,
-  readProfile
+  readProfile,
 };
 
 export default authService;

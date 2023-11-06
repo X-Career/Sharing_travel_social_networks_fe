@@ -14,49 +14,46 @@ import React, {useEffect,} from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
-import BackBtn from '../components/BackBtn'
+
 import styles from './Search.style.js'
 import { COLORS } from '../constants';
 import { useDebounce } from '../Hooks';
+import { API_URL } from '../services/auth_service.jsx';
+
 
 
 const Search = () => {
+
   const [value, setValue] = React.useState('');
   const [searchResult, setSearchResult] = React.useState([]);
   const [data, setData] = React.useState([])
-  const [dataSearch, setDataSearch] = React.useState([])
 
   const navigation = useNavigation()
 
   // Hàm xử lý
   const handlerBlack = () => {
     navigation.navigate('Home')
-    setDataSearch([])
+    setData([])
   }
   const handlerClear = () => {
     setValue('')
-    setDataSearch([])
+    setData([])
   }
   
-  //Hàm tìm kiếm
-  const searchData = ({data, value}) => {
-    if (value === '') {return []}
-    else {
-      return data.filter(item => item.username.includes(value))
-    }
-  }
-  const debounce = useDebounce(value, 300)
+ 
+  const debounce = useDebounce(value, 200)
   // hàm render
   useEffect(() => {
-    axios.get('https://jsonplaceholder.typicode.com/users')
+    if (value === "") {return setData([])}
+    else {
+    axios.get(`${API_URL}newsfeed/search?username=${value}`)
     .then(function (response) {
-      setData(response.data);
+      setData(response.data.users);
     })
     .catch(function (error) {
       console.log(error);
     });
-
-    setDataSearch(searchData({data, value}))
+  }
   },[debounce]);
 
   const Item = ({props}) => {
@@ -66,7 +63,7 @@ const Search = () => {
     const onPress = () => {
       // navigation.navigate('Profile')
       navigation.navigate('Home')
-      setDataSearch([])
+      setData([])
       setValue('')
     }
     return (
@@ -132,7 +129,7 @@ const Search = () => {
 
       <SafeAreaView style={styles.list}>
             <FlatList
-                data = {dataSearch}
+                data = {data}
                 renderItem={({item})=> <Item props={item}/>}
                 keyExtractor={item => item.id}
                 extraData={searchResult}
