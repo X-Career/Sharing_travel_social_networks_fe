@@ -28,6 +28,7 @@ const Profile = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user) || {};
 
+
   const updateUser = useSelector(state => state.auth.user);
   const [isSelected, setSelection] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -78,6 +79,7 @@ const Profile = ({navigation}) => {
       
     },
   });
+
 
   useEffect(() => {
     dispatch(readProfile());

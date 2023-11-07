@@ -16,10 +16,10 @@ import {BackBtn, EditBtn} from '../components';
 
 const Post = ({navigation}) => {
   // const API_URL = 'http://192.168.1.8:3000/';
-  // const API_URL = 'http://192.168.0.227:3000/';
+  const API_URL = 'http://192.168.0.227:3000/';
 
   // Tinh ip
-  const API_URL = 'http://192.168.1.25:3000/';
+  // const API_URL = 'http://192.168.1.25:3000/';
 
   const navigatation = useNavigation();
   const [textNote, setTextNote] = useState('');

@@ -5,6 +5,7 @@ console.log('PostsSlice Api: ', API_URL)
 
 
 
+
 export const fetchPosts = createAsyncThunk(
     'newsfeed/posts',
     async (page) => {

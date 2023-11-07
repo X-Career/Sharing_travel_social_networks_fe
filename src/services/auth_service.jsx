@@ -2,7 +2,10 @@ import axios from 'axios';
 import authHeader from './auth_header';
 import { API_URL } from '@env';
 
+
+
 console.log('auth API_URL: ',API_URL)
+
 
 
 

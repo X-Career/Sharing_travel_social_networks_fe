@@ -5,7 +5,9 @@ import styles from './account.style.js';
 import {formatDistanceToNow } from 'date-fns';
 
 
+
 const Account = ({username, avatar, createdAt}) => {
+
   return (
     <ListItem>
       <Avatar
@@ -20,7 +22,9 @@ const Account = ({username, avatar, createdAt}) => {
       />
       <ListItem.Content style={styles.content}>
         <ListItem.Title  style={styles.title}>{username}</ListItem.Title>
+
         <ListItem.Subtitle style={styles.subTitle}>{formatDistanceToNow(new Date(createdAt))} ago</ListItem.Subtitle>
+
       </ListItem.Content>
     </ListItem>
   )
