@@ -14,7 +14,7 @@ import axios from 'axios';
 import auth_header from '../services/auth_header';
 import {BackBtn, EditBtn} from '../components';
 
-const Post = () => {
+const Post = ({navigation}) => {
   // const API_URL = 'http://192.168.1.8:3000/';
   const API_URL = 'http://192.168.0.227:3000/';
 
@@ -83,7 +83,10 @@ const Post = () => {
   const handleCancel = () => {
     setImages([]);
     setTextNote('');
-    navigatation.navigate('Home');
+    // navigatation.navigate('Home');
+    // navigation.pop();
+    navigation.push('Bottom Navigation');
+
   };
 
   return (

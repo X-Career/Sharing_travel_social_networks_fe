@@ -7,7 +7,9 @@ import {Account, CardImage, Comments, Interact, Content} from '../index.js';
 const NewsFeed = ({post}) => {
   return (
     <View style={styles.container}>
-      <Account username={post.username}/>
+
+      <Account username={post.username} avatar={post.avatar} createdAt={post.createdAt} />
+
       <Content content={post.content} />
       <CardImage images={post.images}/>
           <Interact />

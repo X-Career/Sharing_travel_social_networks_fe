@@ -1,25 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { API_URL } from '@env';
+
+console.log('PostsSlice Api: ', API_URL)
 
 
-//const API_URL = 'http://192.168.1.25:3000/';
 
-// minh
-// const API_URL = 'http://192.168.1.8:3000/';
-const API_URL = 'http://192.168.0.227:3000/';
-
-
-// export const fetchPosts = createAsyncThunk('newsfeed/posts', async () => {
-//     const res = await axios.get(API_URL + 'newsfeed/posts');
-//     const data = res.data.data
-//     return data;
-// })
 
 export const fetchPosts = createAsyncThunk(
     'newsfeed/posts',
     async (page) => {
 
-        const res = await fetch(API_URL + `newsfeed/posts?page=${page}`)
+        // const res = await fetch(API_URL + `newsfeed/posts?page=${page}`)
+        const res = await fetch(`${API_URL}/newsfeed/posts?page=${page}`)
 
         const data = await res.json();
         return {posts: data.posts, page};
@@ -34,9 +26,14 @@ const postsSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchPosts.fulfilled, (state, action) => {
-                // state.posts = action.payload;
-                state.posts = action.payload.page === 1 ? action.payload.posts : state.posts.concat(action.payload.posts)
+
+                state.posts = action.payload.page === 1 ? action.payload.posts : state.posts.concat(action.payload.posts);
             })
+            // .addCase(fetchPosts.fulfilled, (state, action) => {
+            //     const getPosts = action.payload.page === 1 ? action.payload.posts : state.posts.concat(action.payload.posts);
+
+            //     state.posts = getPosts.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
+            // })
             .addCase(fetchPosts.rejected, (state, action) => {
                 state.error = action.error.message;
             })

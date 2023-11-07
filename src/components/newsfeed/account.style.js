@@ -3,7 +3,7 @@ import { COLORS, SIZES } from '../../constants';
 
 const styles = StyleSheet.create({
     content: {
-        flexDirection: 'row',
+        // flexDirection: 'row',
         alignItems: 'baseline',
         justifyContent: 'flex-start',
         marginStart: -6
@@ -15,7 +15,9 @@ const styles = StyleSheet.create({
     },
     subTitle: {
         color: COLORS.gray2,
-    }
+    },
+
+    
 })
 
 export default styles;
