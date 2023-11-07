@@ -36,6 +36,7 @@ const Profile = ({navigation}) => {
   const user = useSelector(state => state.user.user);
   // console.log('Profile: ', user);
   const avatar = useSelector(state => state.user.user.avatar)
+// console.log('avatar', avatar);
   const defaultAvatar = require('../assets/images/default-avatar.jpg');
 
   useEffect(() => {

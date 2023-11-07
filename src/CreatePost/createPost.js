@@ -53,7 +53,7 @@ function CreatePost() {
           const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
             console.log("Camera permission given");
-            const result:any = await launchCamera({mediaType:'photo',cameraType:'front'})
+            const result = await launchCamera({mediaType:'photo',cameraType:'front'})
             setImg(result.assets[0].uri);
           } else {
             console.log("Camera permission denied");

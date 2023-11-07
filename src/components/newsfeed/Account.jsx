@@ -4,7 +4,7 @@ import { ListItem, Avatar } from '@rneui/themed';
 import styles from './account.style.js';
 
 
-const Account = () => {
+const Account = ({username}) => {
   return (
     <ListItem>
       <Avatar
@@ -14,7 +14,7 @@ const Account = () => {
         source={{uri: 'https://randomuser.me/api/portraits/men/36.jpg'}}
       />
       <ListItem.Content style={styles.content}>
-        <ListItem.Title  style={styles.title}>John Schema</ListItem.Title>
+        <ListItem.Title  style={styles.title}>{username}</ListItem.Title>
         <ListItem.Subtitle style={styles.subTitle}>2h ago</ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>
