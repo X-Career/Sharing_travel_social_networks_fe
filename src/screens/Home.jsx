@@ -7,7 +7,6 @@ import { fetchPosts } from '../redux/features/newsfeed/postsSlice';
 const Home = () => {
   const dispatch = useDispatch();
   const posts = useSelector(state => state.posts.posts);
-  // console.log('Posts/Home: ', posts)
   const [page, setPage] = useState(1);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -15,21 +14,18 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchPosts(page));
     setPage(page + 1);
-    // console.log('Posts/Home/useEffect: ', posts);
   }, [dispatch]);
 
   const handleLoadMore = () => {
     dispatch(fetchPosts(page));
     setPage(page + 1);
-    // console.log('Posts/Home/LoadMore: ', posts);
   };
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     setPage(1)
     dispatch(fetchPosts(1)).then(() => setRefreshing(false));
-    // setPage(2);
-    // console.log('Posts/Home/onRefresh: ', posts);
+
 }, [dispatch]);
 
   return (

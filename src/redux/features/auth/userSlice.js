@@ -47,8 +47,8 @@ export const readProfile = createAsyncThunk(
       const data = await authService.readProfile(avatar, fullname, username, email, gender, birthday, description);
       const userData = await data.json()
       // console.log('userData:', userData)
-      return userData;
-      // return {user: userData};
+      // return userData;
+      return {user: userData};
     } catch (e) {
       const message =
       (e.response && e.response.data && e.response.data.message) ||
@@ -61,9 +61,9 @@ export const readProfile = createAsyncThunk(
 
 export const update = createAsyncThunk(
   'auth/update',
-  async ({fullname, gender, description, birthday, avatar}, thunkAPI) => {
+  async ({avatar, birthday, description, fullname, gender}, thunkAPI) => {
     try {
-      const data = await authService.update(fullname, gender, description, birthday, avatar);
+      const data = await authService.update(avatar, birthday, description, fullname, gender);
       console.log('Slice update data', data);
       console.log('Slice update data.data', data.data);
       return {user: data}
@@ -80,7 +80,7 @@ export const update = createAsyncThunk(
 
 export const logout = createAsyncThunk('auth/logout', async () => {
   try {
-    const data =await authService.logout();
+    const data = await authService.logout();
     console.log('logout data', data);
     return {user: data}
   } catch (e) {
@@ -92,6 +92,18 @@ export const logout = createAsyncThunk('auth/logout', async () => {
   }
 });
 
+export const uploadAvatar = createAsyncThunk('auth/cloudinary-upload/avatar', async ({ avatar }) => {
+  try {
+    
+    const data = await authService.uploadAvatar(avatar)
+    console.log('Slice avatar: ', data);
+    return {user: data}
+  } catch (e) {
+    const message = (e.response && e.response.data && e.response.data.message) || e.message || e.toString()
+    thunkAPI.dispatch(setMessage(message))
+  }
+
+})
 
 //wait
 const initialState = {
@@ -136,6 +148,12 @@ const authSlice = createSlice({
       })
       .addCase(readProfile.rejected, (state, action) => {
         state.error = action.error.message;
+      })
+      .addCase(uploadAvatar.fulfilled, (state, action) => {
+      state.user = action.payload.user
+      })
+      .addCase(uploadAvatar.rejected, (state, action) => {
+      state.error = action.error.message
     })
   },
 });

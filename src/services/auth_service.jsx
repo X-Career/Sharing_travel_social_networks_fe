@@ -55,8 +55,7 @@ const readProfile = async (avatar, fullname, username, email, gender, birthday, 
       {headers: authHeader()},
     );
     const data = await res.json();
-    console.log('headers(): ', authHeader())
-      console.log('Auth readProfile: ', res.headers)
+
     if (res.data) {
       // return res.data
       return data;
@@ -69,18 +68,24 @@ const readProfile = async (avatar, fullname, username, email, gender, birthday, 
   }
 };
 
-const update = async (  avatar,  fullname, gender,  birthday,  description,) => {
+const update = async ( avatar, birthday, description, fullname, gender ) => {
   try {
     const headers = authHeader();
-    console.log('request headers: ', headers)
+    // console.log('request headers update: ', headers)
+
     const res = await axios.patch(
       `${API_URL}/user/update`,
-      { avatar, fullname, gender, birthday, description, },
-      // {headers: authHeader()},
+      {
+        avatar: avatar ? avatar : undefined, birthday: birthday ? birthday : undefined,
+        description: description ? description : undefined, fullname: fullname ? fullname : undefined,
+        gender: gender ? gender : undefined
+      },
+
       { headers: headers },
     );
-    console.log('Auth update res: ', res);
-    console.log('Res header: ', res.headers)
+    // console.log('Auth update res: ', res);
+    // console.log('Res header: ', res.headers)
+
     if (res.data) {
       console.log('Auth update res.data: ', res.data);
       return res.data;
@@ -100,11 +105,6 @@ const update = async (  avatar,  fullname, gender,  birthday,  description,) => 
     }
     console.log('Err config: ', error.config);
     throw error;
-
-
-    // console.log('update error:', error);
-    // console.log('update error:', error.message);
-    // throw error;
   }
 };
 
@@ -118,12 +118,25 @@ const logout = async () => {
   }
 };
 
+const uploadAvatar = async (avatar) => {
+  try {
+    const res = await axios.post(`${API_URL}/user/cloudinary-upload/avatar`,
+      { avatar },
+      { headers: authHeader() })
+    return res.data
+    
+  } catch (e) {
+    console.log('UploadAvatar error: ', e)
+  }
+}
+
 const authService = {
   register,
   login,
   update,
   logout,
   readProfile,
+  uploadAvatar,
 };
 
 export default authService;
