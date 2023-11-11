@@ -12,15 +12,17 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 import auth_header from '../services/auth_header';
-import {BackBtn, EditBtn} from '../components';
+import { BackBtn, EditBtn } from '../components';
+import { API_URL } from '@env';
+
+
+console.log('Post url: ', API_URL)
 
 const Post = ({navigation}) => {
-  // const API_URL = 'http://192.168.1.8:3000/';
-  const API_URL = 'http://192.168.0.227:3000/';
 
-  // Tinh ip
-  // const API_URL = 'http://192.168.1.25:3000/';
 
+
+const Post = ({navigation}) => {
   const navigatation = useNavigation();
   const [textNote, setTextNote] = useState('');
   const [images, setImages] = useState([]);
@@ -41,7 +43,7 @@ const Post = ({navigation}) => {
 
     try {
       const res = await axios.post(
-        API_URL + 'user/cloudinary-upload/post',
+        `${API_URL}/user/cloudinary-upload/post`,
         data,
         {
           headers: {

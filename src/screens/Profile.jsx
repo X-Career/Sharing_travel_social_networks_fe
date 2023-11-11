@@ -23,48 +23,40 @@ import {useSelector, useDispatch} from 'react-redux';
 import {COLORS} from '../constants';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 const Profile = ({navigation}) => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.auth.user) || {};
+  const user = useSelector(state => state.auth.user);
 
 
   const updateUser = useSelector(state => state.auth.user);
-  const [isSelected, setSelection] = useState(false);
+  const [selectedGender, setSelectedGender] = useState('');
   const [showEdit, setShowEdit] = useState(false);
 
 
-
   const formik = useFormik({
-    // initailValues: updateUser,
     initialValues: {
-      fullname: '',
-      gender: '',
+      // avatar: 'https://res.cloudinary.com/dwlhttwro/image/upload/v1698407360/ennrjmiuafsd7032nfjx.jpg',
+      avatar: '',
       birthday:  '',
       description: '',
-      avatar: '',
+      fullname: '',
+      gender: '',
       // oldPassword: '',
       // newPassword: '',
     },
     validationSchema: Yup.object({
-      fullname: Yup.string(),
-      gender: Yup.string(),
+      avatar: Yup.string(),
       birthday: Yup.string(),
       description: Yup.string(),
-      avatar: Yup.string(),
+      fullname: Yup.string(),
+      gender: Yup.string(),
       // oldPassword: Yup.string(),
       // newPassword: Yup.string(),
     }),
     onSubmit: (values, {setSubmitting, setErrors}) => {
-      const updateValues = Object.keys(values).reduce((acc, key) => {
-        if (values[key] !== '') {
-          acc[key] = values[key]
-        }
-        return acc;
-      }, {})
-
-      dispatch(update(updateValues))
-      // dispatch(update(values))
+      dispatch(update(values))
         .then(() => {
           console.log('handle onSubmit success')
         setSubmitting(false)
@@ -74,9 +66,7 @@ const Profile = ({navigation}) => {
           setErrors({submit: error.message})
           setSubmitting(false)
         })
-      console.log('Profile/update formik:', values);
-      console.log('Profile/updateValues formik:', updateValues);
-      
+      console.log('Profile/update formik:', values);     
     },
   });
 
@@ -98,6 +88,14 @@ const Profile = ({navigation}) => {
     }
   };
 
+  const handleUploadAvatar = async (avatar) => {
+    const data = new FormData();
+    avatar.forEach((image) => {
+      data.append('image', {
+        
+      })
+    })
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -105,7 +103,7 @@ const Profile = ({navigation}) => {
         <>
           <View style={styles.topLayout}>
             <View style={styles.topTitle}>
-              <BackBtn onPress={() => navigation.goBack()} name="back" />
+              <BackBtn onPress={() => setShowEdit(false)} name='back' />
               <Text style={styles.title}>Profile</Text>
             </View>
             <EditBtn onPress={handleEdit} name="account-cancel" />
@@ -153,9 +151,13 @@ const Profile = ({navigation}) => {
                     <View style={styles.genderItems}>
                       <CheckBox
                         tintColors={{true: COLORS.green, false: COLORS.red}}
-                        value={isSelected}
-                        onValueChange={setSelection}
-
+                        // value={formik.gender === 'Male'}
+                        value={selectedGender === 'Male'}
+                        onValueChange={(newValue) => {
+                          setSelectedGender(newValue ? 'Male' : '')
+                          formik.handleChange('gender')(newValue ? 'Male' : '')
+                        }}
+                        onBlur={formik.handleBlur('gender')}
 
                       />
                       <Text style={styles.desText}>Male</Text>
@@ -164,16 +166,25 @@ const Profile = ({navigation}) => {
                     <View style={styles.genderItems}>
                       <CheckBox
                         tintColors={{true: COLORS.green, false: COLORS.red}}
-                        value={!isSelected}
-                        onValueChange={newValue => setSelection(!newValue)}
-
+                        value={selectedGender === 'Female'}
+                        // value={formik.gender === 'Female'}
+                        onValueChange={(newValue) => {
+                          setSelectedGender(newValue ? 'Female' : '')
+                          formik.handleChange('gender')(newValue ? 'Female' : '')
+                        }}
+                        onBlur={formik.handleBlur('gender')}
                       />
                       <Text style={styles.desText}>Female</Text>
                     </View>
                   </View>
 
                   <View style={styles.wrapper}>
-                    <BirthdayForm />
+                    <BirthdayForm
+                      onSelectDate={(value) => { formik.setFieldValue('birthday', value) }}
+                      onBlur={formik.handleBlur('birthday')}
+                        // value={formik.values.birthday}
+                      
+                    />
                   </View>
 
                   <View style={styles.wrapper}>
