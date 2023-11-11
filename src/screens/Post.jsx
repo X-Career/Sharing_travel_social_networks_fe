@@ -15,7 +15,12 @@ import auth_header from '../services/auth_header';
 import { BackBtn, EditBtn } from '../components';
 import { API_URL } from '@env';
 
+
 console.log('Post url: ', API_URL)
+
+const Post = ({navigation}) => {
+
+
 
 const Post = ({navigation}) => {
   const navigatation = useNavigation();

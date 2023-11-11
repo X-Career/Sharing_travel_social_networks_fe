@@ -29,6 +29,7 @@ const Profile = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
 
+
   const updateUser = useSelector(state => state.auth.user);
   const [selectedGender, setSelectedGender] = useState('');
   const [showEdit, setShowEdit] = useState(false);
@@ -68,6 +69,7 @@ const Profile = ({navigation}) => {
       console.log('Profile/update formik:', values);     
     },
   });
+
 
   useEffect(() => {
     dispatch(readProfile());
