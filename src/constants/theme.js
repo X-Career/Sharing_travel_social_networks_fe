@@ -27,8 +27,12 @@ const SIZES = {
     width
 }
 
-
-
+const SPACING = {
+    s: 8,
+    m: 18,
+    l: 24,
+    xl: 40,
+  };
 
 const SHADOWS = {
     small: {
@@ -52,5 +56,25 @@ const SHADOWS = {
         elevation: 5,
     },
 };
+ const shadow = {
+    light: {
+      shadowColor: '#000',
+      shadowRadius: 4,
+      shadowOpacity: 0.1,
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+    },
+    dark: {
+      shadowColor: '#000',
+      shadowRadius: 4,
+      shadowOpacity: 0.3,
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+    },
+  };
 
-export { COLORS, SIZES, SHADOWS}
+export { COLORS, SIZES, SHADOWS, SPACING, shadow}
