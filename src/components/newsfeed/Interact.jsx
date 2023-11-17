@@ -28,7 +28,7 @@ const Interact = ({comments, postId}) => {
               </TouchableOpacity>
               <Text style={styless.commentTitle}>Comments</Text>
             </View>
-            <View style={styless.commentContainer}>
+            <View>
               <FlatList
                 data={comments}
                 keyExtractor={(item, index) => {
@@ -64,6 +64,9 @@ const Interact = ({comments, postId}) => {
           onPress={() => setOpenModal(true)}
         />
       </TouchableOpacity>
+      <View style={styles.commentsCount}>
+      <Text>{comments.length}</Text>
+      </View>
       {renderModal({comments, postId})}
     </View>
   );
@@ -92,11 +95,13 @@ const styless = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  commentContainer: {},
   commentInput: {
     marginBottom: 40,
     width: '100%',
   },
+  commentsCount: {
+   
+  }
 });
 
 export default Interact;

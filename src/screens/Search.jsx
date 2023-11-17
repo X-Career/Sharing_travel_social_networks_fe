@@ -9,6 +9,7 @@ import { View,
   KeyboardAvoidingView, 
   Keyboard,
   Platform,
+  ScrollView,
 } from 'react-native'
 import React, {useEffect,} from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -18,6 +19,11 @@ import BackBtn from '../components/BackBtn'
 import styles from './Search.style.js'
 import { COLORS } from '../constants';
 import { useDebounce } from '../Hooks';
+import SearchHeader from '../components/search/SearchHeader';
+import TopCarousel from '../components/search/TopCarousel';
+import { PLACES, TOP_CAROUSEL } from '../components/search/CarouselData';
+import SectionHeader from '../components/search/SectionHeader';
+import TripList from '../components/search/TripList';
 
 
 const Search = () => {
@@ -95,6 +101,8 @@ const Search = () => {
   }
   return (
     <View style={{flex:1, color: '#000000'}}>
+      <View>
+
       <KeyboardAvoidingView 
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
@@ -139,8 +147,20 @@ const Search = () => {
                 // initialNumToRender={0}
             />
       </SafeAreaView>
+      </View>
+      <SearchHeader mainTitle='Find Your' secondTitle='Dream Trip'/>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <TopCarousel list={TOP_CAROUSEL}/>
+        <SectionHeader 
+        title='Popular Trips'
+        buttonTitle='See All'
+        onPress={() => {}}
+        />
+        <TripList list={PLACES}/>
+      </ScrollView>
     </View>
   )
 }
+
 
 export default Search
