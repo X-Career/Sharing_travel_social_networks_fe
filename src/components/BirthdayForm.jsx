@@ -20,7 +20,7 @@ const BirthdayForm = ({onSelectDate}) => {
     let formattedDate = currentDate.getDate().toString().padStart(2,'0') + '/' + (currentDate.getMonth() + 1).toString().padStart(2,'0') + '/' + currentDate.getFullYear();
     setText(formattedDate)
 
-    console.log('Birthday value: ', formattedDate)
+    // console.log('Birthday value: ', formattedDate)
     onSelectDate(formattedDate)
 
     onChange(event.target.value)

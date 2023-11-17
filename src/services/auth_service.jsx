@@ -4,7 +4,7 @@ import { API_URL } from '@env';
 
 
 
-console.log('auth API_URL: ',API_URL)
+console.log('auth API_URL: ',API_URL) 
 
 
 
@@ -63,6 +63,8 @@ const readProfile = async (avatar, fullname, username, email, gender, birthday, 
 
     if (res.data) {
       // return res.data
+      console.log('readProfile auth: ',data)
+      console.log('readProfile auth: ',res.data)
       return data;
     } else {
       return 'Error read profile';
@@ -73,42 +75,39 @@ const readProfile = async (avatar, fullname, username, email, gender, birthday, 
   }
 };
 
-const update = async ( avatar, birthday, description, fullname, gender ) => {
+const update = async ( birthday, description, fullname, gender ) => {
   try {
     const headers = authHeader();
-    // console.log('request headers update: ', headers)
-
     const res = await axios.patch(
       `${API_URL}/user/update`,
       {
-        avatar: avatar ? avatar : undefined, birthday: birthday ? birthday : undefined,
+        birthday: birthday ? birthday : undefined,
         description: description ? description : undefined, fullname: fullname ? fullname : undefined,
         gender: gender ? gender : undefined
       },
 
-      { headers: headers },
+      {
+        headers:authHeader(),
+      },
     );
-    // console.log('Auth update res: ', res);
-    // console.log('Res header: ', res.headers)
-
     if (res.data) {
       console.log('Auth update res.data: ', res.data);
       return res.data;
     } else {
-      console.log('update error else');
+      // console.log('update error else');
       return;
     }
   } catch (error) {
     if (error.response) {
-      console.log('Err res data:', error.response.data);
-      console.log('Err res status:', error.response.status);
-      console.log('Err res headers:', error.response.headers);
+      // console.log('Err res data:', error.response.data);
+      // console.log('Err res status:', error.response.status);
+      // console.log('Err res headers:', error.response.headers);
     } else if (error.request) {
-      console.log('Err request:', error.request)
+      // console.log('Err request:', error.request)
     } else {
-      console.log('Err message: ', error.message)
+      // console.log('Err message: ', error.message)
     }
-    console.log('Err config: ', error.config);
+    // console.log('Err config: ', error.config);
     throw error;
   }
 };
@@ -127,11 +126,27 @@ const uploadAvatar = async (avatar) => {
   try {
     const res = await axios.post(`${API_URL}/user/cloudinary-upload/avatar`,
       { avatar },
-      { headers: authHeader() })
+      {
+        headers:authHeader(),
+        })
+    console.log('uploadAvatar auth: ', res)
     return res.data
     
   } catch (e) {
     console.log('UploadAvatar error: ', e)
+  }
+}
+
+const getUserPost = async () => {
+  try {
+    const res = await axios.get(`${API_URL}/user/userPost`,
+      { headers: authHeader() })
+    // console.log('getUserPost auth res: ', res)
+    const data = res.data;
+    console.log('getUserPost auth data: ', data)
+    return data;
+  } catch (error) {
+    console.error('getUserPost auth: ', error)
   }
 }
 
@@ -142,6 +157,7 @@ const authService = {
   logout,
   readProfile,
   uploadAvatar,
+  getUserPost,
 };
 
 export default authService;

@@ -1,15 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { API_URL } from '@env';
 
-console.log('PostsSlice Api: ', API_URL)
+console.log('PostsSlice Api: ', API_URL) 
 
 export const fetchPosts = createAsyncThunk(
     'newsfeed/posts',
     async (page) => {
-
-        // const res = await fetch(API_URL + `newsfeed/posts?page=${page}`)
         const res = await fetch(`${API_URL}/newsfeed/posts?page=${page}`)
-
         const data = await res.json();
         return {posts: data.posts, page};
     }
