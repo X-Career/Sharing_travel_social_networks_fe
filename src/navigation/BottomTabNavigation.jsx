@@ -4,7 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import  {COLORS}  from '../constants/index';
 import { Home, Profile, Search } from '../screens'
 import Post from '../screens/Post';
-import Reel from '../screens/Reel';
+import MyTrips from '../screens/MyTrips';
 
 const Tab = createBottomTabNavigator();
 
@@ -71,8 +71,8 @@ const BottomTabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Reel"
-        component={Reel}
+        name="MyTrips"
+        component={MyTrips}
         options={{
           tabBarIcon: ({focused}) => {
             return (

@@ -16,7 +16,7 @@ import { BackBtn, EditBtn } from '../components';
 import { API_URL } from '@env';
 
 
-console.log('Post url: ', API_URL)
+console.log('Post url: ', API_URL) 
 
 
 const Post = ({navigation}) => {
@@ -36,7 +36,7 @@ const Post = ({navigation}) => {
         uri: image.uri,
       }); 
     });
-    // console.log(data);
+    console.log('Post data: ',data);
 
     try {
       const res = await axios.post(

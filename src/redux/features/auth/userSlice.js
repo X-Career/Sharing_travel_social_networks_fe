@@ -61,13 +61,17 @@ export const readProfile = createAsyncThunk(
 
 export const update = createAsyncThunk(
   'auth/update',
-  async ({avatar, birthday, description, fullname, gender}, thunkAPI) => {
+  async ({ birthday, description, fullname, gender}, thunkAPI) => {
     try {
-      const data = await authService.update(avatar, birthday, description, fullname, gender);
-      console.log('Slice update data', data);
-      console.log('Slice update data.data', data.data);
-      return {user: data}
-      // return  data
+      const data = await authService.update( birthday, description, fullname, gender);
+      
+      const jdata = await data.json();
+      console.log('jdata: ', jdata)
+      const { user, accessToken } = jdata
+      console.log('jdata2: ', jdata)
+      return {user}
+      // console.log('Slice update data', data);
+      // return {user: data}
     } catch (e) {
       const message =
       (e.response && e.response.data && e.response.data.message) ||
@@ -92,17 +96,39 @@ export const logout = createAsyncThunk('auth/logout', async () => {
   }
 });
 
-export const uploadAvatar = createAsyncThunk('auth/cloudinary-upload/avatar', async ({ avatar }) => {
+export const uploadAvatar = createAsyncThunk('auth/user/cloudinary-upload/avatar', async ({ avatar }, thunkAPI) => {
   try {
-    
     const data = await authService.uploadAvatar(avatar)
     console.log('Slice avatar: ', data);
-    return {user: data}
+    if (data) {
+      return {user: data}
+    } else {
+      throw new Error('No data returned from authService.uploadAvatar');
+    }
   } catch (e) {
     const message = (e.response && e.response.data && e.response.data.message) || e.message || e.toString()
     thunkAPI.dispatch(setMessage(message))
+    return thunkAPI.rejectWithValue(message);
   }
+})
 
+export const userPost = createAsyncThunk('auth/user/userPost', async (thunkAPI) => {
+  try {
+    
+    const data = await authService.getUserPost();
+    console.log('Data userPost slice: ', data)
+    
+    if (data) {
+      return {posts: data} 
+    } else {
+      console.error('No data returned from auth.userPost')
+    }
+  } catch (error) {
+    console.error('Data userPost slice: ', error)
+    const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+    thunkAPI.dispatch(setMessage(message))
+    return thunkAPI.rejectWithValue(message);
+  }
 })
 
 //wait
@@ -153,6 +179,12 @@ const authSlice = createSlice({
       state.user = action.payload.user
       })
       .addCase(uploadAvatar.rejected, (state, action) => {
+      state.error = action.error.message
+    })
+      .addCase(userPost.fulfilled, (state, action) => {
+      state.userPosts = action.payload.posts
+      })
+      .addCase(userPost.rejected, (state, action) => {
       state.error = action.error.message
     })
   },
