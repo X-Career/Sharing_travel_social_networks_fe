@@ -9,6 +9,8 @@ console.log('auth API_URL: ',API_URL)
 
 
 
+
+
 const register = async (username, email, password) => {
   const res = await axios.post(`${API_URL}/auth/register`, {
     username,

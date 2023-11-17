@@ -6,7 +6,7 @@ import ChangeBtn from "./ChangeBtn";
 import NewsFeed from "./newsfeed/NewsFeed";
 import Account from "./newsfeed/Account";
 import CardImage from "./newsfeed/CardImage";
-import Comments from "./newsfeed/Comments";
+import CommentInput from "./newsfeed/CommentInput";
 import Interact from "./newsfeed/Interact";
 import Post from "./Post";
 import Myinput from "./LoginInput";
@@ -22,7 +22,7 @@ export {
     NewsFeed,
     Account,
     CardImage,
-    Comments,
+    CommentInput,
     Interact,
     Post,
     Myinput,

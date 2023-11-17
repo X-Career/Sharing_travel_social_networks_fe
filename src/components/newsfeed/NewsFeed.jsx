@@ -12,8 +12,7 @@ const NewsFeed = ({post}) => {
 
       <Content content={post.content} />
       <CardImage images={post.images}/>
-          <Interact />
-          <Comments />
+          <Interact comments={post.comments} postId={post._id}/>
     </View>
   )
 }

@@ -19,6 +19,8 @@ import { API_URL } from '@env';
 console.log('Post url: ', API_URL) 
 
 
+
+
 const Post = ({navigation}) => {
   const navigatation = useNavigation();
   const [textNote, setTextNote] = useState('');
