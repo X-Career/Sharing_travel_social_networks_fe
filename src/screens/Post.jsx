@@ -12,14 +12,10 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 import auth_header from '../services/auth_header';
-import { BackBtn, EditBtn } from '../components';
-import { API_URL } from '@env';
+import {BackBtn, EditBtn} from '../components';
+import {API_URL} from '@env';
 
-
-console.log('Post url: ', API_URL) 
-
-
-
+console.log('Post url: ', API_URL);
 
 const Post = ({navigation}) => {
   const navigatation = useNavigation();
@@ -36,9 +32,9 @@ const Post = ({navigation}) => {
         name: image.fileName,
         type: image.type,
         uri: image.uri,
-      }); 
+      });
     });
-    console.log('Post data: ',data);
+    console.log('Post data: ', data);
 
     try {
       const res = await axios.post(
@@ -47,7 +43,7 @@ const Post = ({navigation}) => {
         {
           headers: {
             ...auth_header(),
-            'Content-Type': 'multipart/form-data', 
+            'Content-Type': 'multipart/form-data',
           },
         },
       );
@@ -87,7 +83,6 @@ const Post = ({navigation}) => {
     // navigatation.navigate('Home');
     // navigation.pop();
     navigation.push('Bottom Navigation');
-
   };
 
   return (
@@ -143,11 +138,11 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primary,
   },
   navigatePost: {
-    flexDirection: 'row', 
-    justifyContent: 'space-between', 
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   navigateButtonPost: {
-    alignItems: 'flex-start', 
+    alignItems: 'flex-start',
   },
   textInputContainer: {
     marginTop: 70,
@@ -171,10 +166,10 @@ const styles = StyleSheet.create({
     width: '40%',
   },
   sliderBox: {
-    flex: 5, 
-    marginTop: 20, 
-    borderRadius: 5
-  }
+    flex: 5,
+    marginTop: 20,
+    borderRadius: 5,
+  },
 });
 
 export default Post;
