@@ -267,7 +267,7 @@ const Profile = ({navigation}) => {
                     ) : null}
                   </View>
 
-                  <View style={styles.wrapper}>
+                  {/* <View style={styles.wrapper}>
                     <TextInput
                       secureTextEntry
                       placeholder="Enter old password"
@@ -284,18 +284,20 @@ const Profile = ({navigation}) => {
                       // value=""
                       style={styles.longInput}
                     />
-                  </View>
+                  </View> */}
                   <View style={styles.wrapperBtn}>
                     <Button
                       radius={'sm'}
                       type="solid"
                       // onPress={handleSubmit}
-                      onPress={() => {
-                        formik.handleSubmit();
+                      onPress={async() => {
+                        await formik.handleSubmit();
                         if (isPickedAvatar) {
-                          handleUploadAvatar(pickedAvatar);
+                         await handleUploadAvatar(pickedAvatar);
                         }
                         setShowEdit(false);
+
+                        handleLogout()
                       }}>
                       Save
                       <Icon

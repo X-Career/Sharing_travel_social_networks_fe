@@ -100,15 +100,15 @@ const update = async (birthday, description, fullname, gender) => {
     }
   } catch (error) {
     if (error.response) {
-      // console.log('Err res data:', error.response.data);
-      // console.log('Err res status:', error.response.status);
-      // console.log('Err res headers:', error.response.headers);
+      console.log('Err res data:', error.response.data);
+      console.log('Err res status:', error.response.status);
+      console.log('Err res headers:', error.response.headers);
     } else if (error.request) {
-      // console.log('Err request:', error.request)
+      console.log('Err request:', error.request)
     } else {
-      // console.log('Err message: ', error.message)
+      console.log('Err message: ', error.message)
     }
-    // console.log('Err config: ', error.config);
+    console.log('Err config: ', error.config);
     throw error;
   }
 };
