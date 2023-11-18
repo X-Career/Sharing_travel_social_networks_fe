@@ -1,15 +1,8 @@
 import axios from 'axios';
 import authHeader from './auth_header';
-import { API_URL } from '@env';
+import {API_URL} from '@env';
 
-
-
-console.log('auth API_URL: ',API_URL) 
-
-
-
-
-
+console.log('auth API_URL: ', API_URL);
 
 const register = async (username, email, password) => {
   const res = await axios.post(`${API_URL}/auth/register`, {
@@ -51,20 +44,27 @@ const login = async (username, password) => {
   }
 };
 
-const readProfile = async (avatar, fullname, username, email, gender, birthday, description,
+const readProfile = async (
+  avatar,
+  fullname,
+  username,
+  email,
+  gender,
+  birthday,
+  description,
 ) => {
   try {
     const res = await axios.get(
       `${API_URL}/current`,
-      {avatar, fullname, username, email, gender, birthday, description, },
+      {avatar, fullname, username, email, gender, birthday, description},
       {headers: authHeader()},
     );
     const data = await res.json();
 
     if (res.data) {
       // return res.data
-      console.log('readProfile auth: ',data)
-      console.log('readProfile auth: ',res.data)
+      console.log('readProfile auth: ', data);
+      console.log('readProfile auth: ', res.data);
       return data;
     } else {
       return 'Error read profile';
@@ -75,19 +75,20 @@ const readProfile = async (avatar, fullname, username, email, gender, birthday, 
   }
 };
 
-const update = async ( birthday, description, fullname, gender ) => {
+const update = async (birthday, description, fullname, gender) => {
   try {
     const headers = authHeader();
     const res = await axios.patch(
       `${API_URL}/user/update`,
       {
         birthday: birthday ? birthday : undefined,
-        description: description ? description : undefined, fullname: fullname ? fullname : undefined,
-        gender: gender ? gender : undefined
+        description: description ? description : undefined,
+        fullname: fullname ? fullname : undefined,
+        gender: gender ? gender : undefined,
       },
 
       {
-        headers:authHeader(),
+        headers: authHeader(),
       },
     );
     if (res.data) {
@@ -122,33 +123,35 @@ const logout = async () => {
   }
 };
 
-const uploadAvatar = async (avatar) => {
+const uploadAvatar = async avatar => {
   try {
-    const res = await axios.post(`${API_URL}/user/cloudinary-upload/avatar`,
-      { avatar },
+    const res = await axios.post(
+      `${API_URL}/user/cloudinary-upload/avatar`,
+      {avatar},
       {
-        headers:authHeader(),
-        })
-    console.log('uploadAvatar auth: ', res)
-    return res.data
-    
+        headers: authHeader(),
+      },
+    );
+    console.log('uploadAvatar auth: ', res);
+    return res.data;
   } catch (e) {
-    console.log('UploadAvatar error: ', e)
+    console.log('UploadAvatar error: ', e);
   }
-}
+};
 
 const getUserPost = async () => {
   try {
-    const res = await axios.get(`${API_URL}/user/userPost`,
-      { headers: authHeader() })
+    const res = await axios.get(`${API_URL}/user/userPost`, {
+      headers: authHeader(),
+    });
     // console.log('getUserPost auth res: ', res)
     const data = res.data;
-    console.log('getUserPost auth data: ', data)
+    // console.log('getUserPost auth data: ', data);
     return data;
   } catch (error) {
-    console.error('getUserPost auth: ', error)
+    console.error('getUserPost auth: ', error);
   }
-}
+};
 
 const authService = {
   register,

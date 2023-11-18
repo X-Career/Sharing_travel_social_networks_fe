@@ -26,22 +26,22 @@ import {useSelector, useDispatch} from 'react-redux';
 import {COLORS} from '../constants';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
-import { launchImageLibrary } from 'react-native-image-picker';
-import { API_URL } from '@env';
+import {launchImageLibrary} from 'react-native-image-picker';
+import {API_URL} from '@env';
 import auth_header from '../services/auth_header';
-import axios from 'axios'
+import axios from 'axios';
 
-console.log('AVATAR API: ',API_URL)
- 
+console.log('AVATAR API: ', API_URL);
+
 const Profile = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
-  console.log('user useSelector: ', user)
+  console.log('user useSelector: ', user);
 
   const [selectedGender, setSelectedGender] = useState('');
   const [showEdit, setShowEdit] = useState(false);
   const [pickedAvatar, setPickedAvatar] = useState(null);
-  const [isPickedAvatar, setIsPickedAvatar] = useState(false)
+  const [isPickedAvatar, setIsPickedAvatar] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -100,34 +100,36 @@ const Profile = ({navigation}) => {
         if (response.didCancel == true) {
           return;
         } else {
-          console.log('Res of ChooseAvatar: ', response.assets)
-          const newAvatar = response.assets[0]
-          console.log('newAvatar: ', newAvatar)
+          console.log('Res of ChooseAvatar: ', response.assets);
+          const newAvatar = response.assets[0];
+          console.log('newAvatar: ', newAvatar);
           setPickedAvatar(newAvatar);
-          setIsPickedAvatar(true)
+          setIsPickedAvatar(true);
         }
       },
     );
   };
 
-  const handleUploadAvatar = async (pickedAvatar) => {
-    console.log('pickedAvatar: ',pickedAvatar)
+  const handleUploadAvatar = async pickedAvatar => {
+    console.log('pickedAvatar: ', pickedAvatar);
     const data = new FormData();
     data.append('avatar', {
       name: pickedAvatar.fileName,
       type: pickedAvatar.type,
       uri: pickedAvatar.uri,
-    })
-    console.log('Data Avatar: ', data)
+    });
+    console.log('Data Avatar: ', data);
     try {
-      const res = await axios.post(`${API_URL}/user/cloudinary-upload/avatar`, data,
-        { headers: auth_header() })
-      console.log('Upload Avatar Successed')
-    }catch (e) {
-      console.log('Err Upload: ', e) 
+      const res = await axios.post(
+        `${API_URL}/user/cloudinary-upload/avatar`,
+        data,
+        {headers: auth_header()},
+      );
+      console.log('Upload Avatar Successed');
+    } catch (e) {
+      console.log('Err Upload: ', e);
     }
-    }
-
+  };
 
   // const handleUploadAvatar = (pickedAvatar) => {
   //   console.log('test pickedA :', pickedAvatar);
@@ -155,9 +157,6 @@ const Profile = ({navigation}) => {
   //     throw error;
   //   }
   // };
-
-
-    
 
   return (
     <SafeAreaView style={styles.container}>
@@ -249,7 +248,6 @@ const Profile = ({navigation}) => {
                         formik.setFieldValue('birthday', value);
                       }}
                       onBlur={formik.handleBlur('birthday')}
-                      
                     />
                   </View>
 
@@ -297,7 +295,7 @@ const Profile = ({navigation}) => {
                         if (isPickedAvatar) {
                           handleUploadAvatar(pickedAvatar);
                         }
-                        setShowEdit(false)
+                        setShowEdit(false);
                       }}>
                       Save
                       <Icon

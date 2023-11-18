@@ -116,7 +116,7 @@ export const userPost = createAsyncThunk('auth/user/userPost', async (thunkAPI) 
   try {
     
     const data = await authService.getUserPost();
-    console.log('Data userPost slice: ', data)
+    // console.log('Data userPost slice: ', data)
     
     if (data) {
       return {posts: data} 
@@ -182,7 +182,7 @@ const authSlice = createSlice({
       state.error = action.error.message
     })
       .addCase(userPost.fulfilled, (state, action) => {
-      state.userPosts = action.payload.posts
+      state.userPosts = action.payload.posts.posts
       })
       .addCase(userPost.rejected, (state, action) => {
       state.error = action.error.message
