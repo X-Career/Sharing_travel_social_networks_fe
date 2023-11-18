@@ -20,7 +20,7 @@ const MyTrips = () => {
   }, [dispatch]);
 
   return (
-    <SafeAreaView style={{backgroundColor: 'white'}}>
+    <SafeAreaView style={{flex: 1,backgroundColor: 'white'}}>
       <View>
         <Text
           style={{
@@ -32,7 +32,7 @@ const MyTrips = () => {
           My trips
         </Text>
         {userPosts == undefined ? (
-          <ActivityIndicator size="large" />
+          <ActivityIndicator size="large" style={{marginTop: 100}} />
         ) : (
           <FlatList
             data={userPosts}
